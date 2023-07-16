@@ -1,0 +1,4 @@
+class BiographyDecorator < SimpleDelegator
+
+
+end

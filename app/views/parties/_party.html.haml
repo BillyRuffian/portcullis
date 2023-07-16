@@ -1,0 +1,9 @@
+-# locals: party:Party
+
+.card.shadow.mb-5.p-0
+  .card-header{ style: "background-color: ##{party.background_colour}" }
+  .card-body
+    .card-text
+      .card-title
+        %h6= party.name
+      %small.fw-lighter= party.abbreviation

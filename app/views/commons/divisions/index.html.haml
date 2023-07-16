@@ -1,0 +1,11 @@
+%h1 Commons::Divisions#index
+%p Find me in app/views/commons/divisions/index.html.haml
+
+- @division_dates.each do |(date, divisions)|
+  %p.text-secondary.border-bottom.border-success.border-opacity-25= date.to_fs(:day_and_date)
+  .vstack.gap-3
+    - divisions.each do |division|
+      = render partial: 'division', locals: {division:}
+
+-# - @divisions.each do |div|
+-#   = render partial: 'division', locals: {division: div}

@@ -1,0 +1,6 @@
+%h1 Parties#index
+
+
+- @parties.each do |party|
+  .row
+    = render partial: 'party', locals: {party: party}  

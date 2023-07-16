@@ -1,0 +1,17 @@
+-# locals: division:DivisionGroupedByParty
+
+-# .card.shadow.mb-2.p-0
+-#   .card-header
+-#     .card-title
+-#       %h6= division.title
+-#   .card-body
+-#     .card-text
+-#       foo
+
+.division{ id: "division-#{division.division_id}" }
+  %h4= CGI.unescapeHTML division.title
+  .row
+    .col 
+      foo 
+    .col 
+      bar
