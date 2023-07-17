@@ -22,8 +22,15 @@
                 or #{distance_of_time_in_words(@member.latest_house_membership.membership_start_date, Date.today)}.
             - if @member.commons?
               %p.card-text
-                #{@member.pronoun_subjective.capitalize} #{@member.current? ? 'represents' : 'last represented'} the 
-                #{@member.latest_house_membership.membership_from} constituency.
+                #{@member.pronoun_subjective.capitalize} #{@member.current? ? 'represents' : 'last represented'} the
+                %a{href: constituency_path(@member.latest_house_membership.membership_from_id )}= @member.latest_house_membership.membership_from
+                constituency.
+
+%section 
+  .container
+    %turbo-frame#contact{ src: member_contact_path(@member.id) }
+      = render partial: 'shared/spinner'
+
 
 %section 
   .container

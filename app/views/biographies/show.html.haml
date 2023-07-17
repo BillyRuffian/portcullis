@@ -1,71 +1,27 @@
 
 %turbo-frame#biography
-
-
-
-
-
   .card 
     .card-header 
       Biography
     .card-body
+      %h5.card-title Representations
 
-      %ul.timeline
-        %li.timeline-item.mb-5
-          %h5.fw-bold Our company starts its operations
-          %p.text-muted.mb-2.fw-bold 11 March 2020
-          %p.text-muted
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit
-            necessitatibus adipisci, ad alias, voluptate pariatur officia
-            repellendus repellat inventore fugit perferendis totam dolor
-            voluptas et corrupti distinctio maxime corporis optio?
-        %li.timeline-item.mb-5
-          %h5.fw-bold First customer
-          %p.text-muted.mb-2.fw-bold 19 March 2020
-          %p.text-muted
-            Quisque ornare dui nibh, sagittis egestas nisi luctus nec. Sed
-            aliquet laoreet sapien, eget pulvinar lectus maximus vel.
-            Phasellus suscipit porta mattis.
-        %li.timeline-item.mb-5
-          %h5.fw-bold Our team exceeds 10 people
-          %p.text-muted.mb-2.fw-bold 24 June 2020
-          %p.text-muted
-            Orci varius natoque penatibus et magnis dis parturient montes,
-            nascetur ridiculus mus. Nulla ullamcorper arcu lacus, maximus
-            facilisis erat pellentesque nec. Duis et dui maximus dui aliquam
-            convallis. Quisque consectetur purus erat, et ullamcorper sapien
-            tincidunt vitae.
-        %li.timeline-item.mb-5
-          %h5.fw-bold Earned the first million $!
-          %p.text-muted.mb-2.fw-bold 15 October 2020
-          %p.text-muted
-            Nulla ac tellus convallis, pulvinar nulla ac, fermentum diam. Sed
-            et urna sit amet massa dapibus tristique non finibus ligula. Nam
-            pharetra libero nibh, id feugiat tortor rhoncus vitae. Ut suscipit
-            vulputate mattis.
-
-
-
-      %h5.card-title All representations
-      %p.card-text 
-        %table.table
-          %thead
-            %th{ scope: :col } #
-            %th{ scope: :col } House 
-            %th{ scope: :col } Consitiuency
-            %th{ scope: :col } Dates
-            %th{ scope: :col } Notes
-          %tbody
-            - @biography.representations.each_with_index do |representation, idx|
-              %tr{ class: representation.end_date ? nil : 'table-info'}
-                %td= idx+1 
-                %td= representation.house == 1 ? 'Commons' : 'Lords'
-                %td= representation.name
-                %td
-                  = representation.start_date.to_date.to_fs(:rfc822)
-                  &ndash;
-                  = representation.end_date ? representation.end_date.to_date.to_fs(:rfc822) : 'current'
-                %td= representation.additional_info
+      %ul.timeline-with-icons.ms-3.mt-3
+        - @biography.representations.sort_by(&:start_date).reverse.each do |representation| 
+          %li.timeline-item.mb-5
+            %span.timeline-icon
+              %i.fa-solid.fa-location-dot.text-primary.fa-sm.fa-fw
+            %h6= representation.name
+        
+        
+            %p.text-body-secondary.mb-2 
+              #{representation.start_date.to_date.to_fs(:long_ordinal)}&ndash;#{representation.end_date ? representation.end_date.to_date.to_fs(:long_ordinal) : 'present' },
+              - if representation.end_date.nil? 
+                #{distance_of_time_in_words_to_now(representation.start_date)}.
+              - else 
+                #{distance_of_time_in_words(representation.start_date, representation.end_date)}.
+              - if representation.additional_info 
+                #{representation.additional_info}.
       
       - unless @biography.government_posts.empty?
         %h5.card-title  Government posts
@@ -78,6 +34,4 @@
       - unless @biography.committee_memberships.empty?
         %h5.card-title  Committee memberships 
         %p= render partial: 'posts', locals: {posts: @biography.committee_memberships}
-
-  = debug @biography
 

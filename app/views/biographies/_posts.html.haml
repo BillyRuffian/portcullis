@@ -1,24 +1,26 @@
 -# expects posts : [BiographyItem]
 
-.card-text 
-  %table.table
-    %thead
-      %th{ scope: :col } #
-      %th{ scope: :col } House 
-      %th{ scope: :col } Role
-      %th{ scope: :col } Dates
-    %tbody
-      - posts.sort_by(&:start_date).reverse.each_with_index do |post, idx|
-        %tr{ class: post.end_date ? nil : 'table-info'}
-          %th{ scope: :row }= idx+1
-          %td= post.house == 1 ? 'Commons' : 'Lords'
-          %td
-            - if !post.additional_info_link.nil?
-              %a{ href: post.additional_info_link }= post.name
-            - else
-              = post.name
-          %td
-            = post.start_date.to_date.to_fs(:rfc822)
-            &ndash;
-            = post.end_date ? post.end_date.to_date.to_fs(:rfc822) : 'current'
+.card-text
+  %ul.timeline-with-icons.ms-3.mt-3
+    - posts.sort_by(&:start_date).reverse.each do |post| 
+      %li.timeline-item.mb-5
+        %span.timeline-icon
+          - if post.end_date.nil?
+            %i.fa-solid.fa-briefcase.text-primary.fa-sm.fa-fw
+          - else 
+            %i.fa-solid.fa-briefcase.text-secondary.fa-sm.fa-fw
+        %h6= post.name
+    
+        %p
+          - if !post.additional_info_link.nil?
+            %a{ href: post.additional_info_link }= post.additional_info 
+          - else 
+            = post.additional_info
 
+        %p.text-body-secondary.mb-2
+          House of #{post.house == 1 ? 'Commons' : 'Lords'}. 
+          #{post.start_date.to_date.to_fs(:long_ordinal)}&ndash;#{post.end_date ? post.end_date.to_date.to_fs(:long_ordinal) : 'present' },
+          - if post.end_date.nil? 
+            #{distance_of_time_in_words_to_now(post.start_date)}.
+          - else 
+            #{distance_of_time_in_words(post.start_date, post.end_date)}.

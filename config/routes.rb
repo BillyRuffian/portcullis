@@ -6,9 +6,11 @@ Rails.application.routes.draw do
 
   resources :members, only: :show do 
     resource :biography, only: :show
+    resource :contact, only: :show
   end
 
   resources :parties, only: [:index]
+  resources :constituencies, only: :show
 
   # get 'parties/index'
   # get 'parties/show'
