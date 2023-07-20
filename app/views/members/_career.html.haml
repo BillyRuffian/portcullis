@@ -1,10 +1,10 @@
 %turbo-frame#tabbed_content
-  = render partial: 'tabbed_navigation'
+  .container
+    = render partial: 'tabbed_navigation'
 
-  .card.bg-light.pt-3.pb-3
-    .container
+    .pt-3.pb-3
       %turbo-frame#contact{ src: member_contact_path(@member.id) }
         = render partial: 'shared/spinner'
- 
+
       %turbo-frame#biography{ src: member_biography_path(@member.id) }
         = render partial: 'shared/spinner'

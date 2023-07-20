@@ -6,10 +6,10 @@
       .card-body 
         .row.row-col-autojustify-content-center
           - @contacts.each do |contact| 
-            .card.p-0.m-2.col
+            .card.p-0.m-1.col
               .card-body 
                 .hstack.align-items-start.gap-3 
-                  .p-2= contact_icon(contact) 
+                  .p-1= contact_icon(contact) 
                   .p-2
                     - if contact.is_web_address
                       %a.stretched-link{ href: contact.line1 }= URI(contact.line1).host.sub(/^www./, '')

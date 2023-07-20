@@ -11,9 +11,9 @@
           %li.timeline-item.mb-5
             %span.timeline-icon
               - if representation.end_date.nil?
-                %i.fa-solid.fa-location-dot.text-primary.fa-sm.fa-fw
+                %i.bi.bi-geo-alt-fill
               -else 
-                %i.fa-solid.fa-location-pin.text-primary.fa-sm.fa-fw
+                %i.bi.bi-geo-alt
             %h6= representation.name
         
         
@@ -33,6 +33,10 @@
       - unless @biography.opposition_posts.empty?
         %h5.card-title  Opposition posts
         %p= render partial: 'posts', locals: {posts: @biography.opposition_posts}
+      
+      - unless @biography.other_posts.empty?
+        %h5.card-title  Other posts
+        %p= render partial: 'posts', locals: {posts: @biography.other_posts}
 
       - unless @biography.committee_memberships.empty?
         %h5.card-title  Committee memberships 

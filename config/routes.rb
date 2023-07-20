@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   resources :members, only: :show do 
     resource :biography, only: :show
     resource :contact, only: :show
+    resource :focus, only: :show
+    resource :member_interest, only: :show
 
     member do
       get 'interests'

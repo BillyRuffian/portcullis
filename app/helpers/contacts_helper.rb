@@ -15,16 +15,16 @@ module ContactsHelper
     when 'Website'
       'bi bi-link'
     when 'Twitter'
-      'fa-brands fa-twitter'
+      'bi bi-twitter'
     when 'Facebook'
-      'fa-brands fa-facebook'
+      'bi bi-facebook'
     when /office$/
-      'fa-solid fa-building'
+      'bi bi-building-fill'
     else
-      'fa-regular fa-circle'
+      'bi bi-info-circle'
     end
 
-    %Q{<i class="#{fa_class} text-primary fa-fw fa-xl"></i>}.html_safe
+    %Q{<h3><i class="#{fa_class} text-primary"></i></h2>}.html_safe
   end
 
 end

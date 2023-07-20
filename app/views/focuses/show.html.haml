@@ -1,0 +1,13 @@
+%turbo-frame#focus
+  - unless @focus_areas && @focus_areas.empty?
+    .card.bg-light.mb-3.shadow-sm
+      .card-header Focus areas
+      .card-body 
+        .row.row-col-autojustify-content-center
+          - @focus_areas.each do |focus| 
+            .card.p-0.m-2.col
+              .card-body
+                .text-center
+                  - focus.focus.first.split(',').each do |f|
+                    %span.badge.bg-primary= f.titleize
+              .card-footer.text-body-secondary.text-center= focus.category

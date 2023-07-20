@@ -79,3 +79,5 @@ gem "html2haml", "~> 2.3"
 
 gem 'parliament_members', path: '/home/nbt/Projects/parl_openapi_clients/members/members'
 gem 'parliament_commons_votes', path: '/home/nbt/Projects/parl_openapi_clients/commons_votes/commons_votes'
+
+gem "chartkick", "~> 5.0"

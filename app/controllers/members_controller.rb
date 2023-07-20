@@ -1,7 +1,8 @@
 class MembersController < ApplicationController
+  include MembersConcern
+
   def show
-    api = ParliamentMembers::MembersApi.new
-    @member = MemberDecorator.new(api.api_members_id_get(member_params[:id]).value)
+    @member = MemberDecorator.new(members_api.api_members_id_get(member_params[:id]).value)
   end
 
   def interests

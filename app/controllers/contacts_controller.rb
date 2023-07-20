@@ -1,7 +1,8 @@
 class ContactsController < ApplicationController
+  include MembersConcern
+
   def show
-    api = ParliamentMembers::MembersApi.new
-    @contacts = api.api_members_id_contact_get(member_params[:member_id]).value
+    @contacts = members_api.api_members_id_contact_get(member_params[:member_id]).value
   end
 
   private
