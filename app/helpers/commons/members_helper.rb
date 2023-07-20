@@ -1,2 +1,0 @@
-module Commons::MembersHelper
-end

@@ -4,6 +4,9 @@ class MembersController < ApplicationController
     @member = MemberDecorator.new(api.api_members_id_get(member_params[:id]).value)
   end
 
+  def interests
+  end
+
   private
 
   def member_params

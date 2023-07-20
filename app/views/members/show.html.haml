@@ -1,3 +1,6 @@
+COLLECTION 
+%i.bi.bi-collection 
+
 
 %section.mb-3
   .container 
@@ -27,14 +30,5 @@
                 constituency.
 
 %section 
-  .container
-    %turbo-frame#contact{ src: member_contact_path(@member.id) }
-      = render partial: 'shared/spinner'
-
-
-%section 
-  .container
-    %turbo-frame#biography{ src: member_biography_path(@member.id) }
-      = render partial: 'shared/spinner'
-
-= debug @member
+  .container.bg-light
+    = render partial: 'career'

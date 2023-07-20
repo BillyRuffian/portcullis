@@ -13,7 +13,7 @@ module ContactsHelper
   def contact_icon(contact)
     fa_class = case contact.type
     when 'Website'
-      'fa-solid fa-globe'
+      'bi bi-link'
     when 'Twitter'
       'fa-brands fa-twitter'
     when 'Facebook'

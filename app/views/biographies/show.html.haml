@@ -1,6 +1,6 @@
 
 %turbo-frame#biography
-  .card 
+  .card.shadow-sm
     .card-header 
       Biography
     .card-body
@@ -10,7 +10,10 @@
         - @biography.representations.sort_by(&:start_date).reverse.each do |representation| 
           %li.timeline-item.mb-5
             %span.timeline-icon
-              %i.fa-solid.fa-location-dot.text-primary.fa-sm.fa-fw
+              - if representation.end_date.nil?
+                %i.fa-solid.fa-location-dot.text-primary.fa-sm.fa-fw
+              -else 
+                %i.fa-solid.fa-location-pin.text-primary.fa-sm.fa-fw
             %h6= representation.name
         
         

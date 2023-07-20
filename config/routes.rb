@@ -7,6 +7,10 @@ Rails.application.routes.draw do
   resources :members, only: :show do 
     resource :biography, only: :show
     resource :contact, only: :show
+
+    member do
+      get 'interests'
+    end
   end
 
   resources :parties, only: [:index]

@@ -1,2 +1,0 @@
-module Commons::DivisionsHelper
-end
