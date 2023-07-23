@@ -1,7 +1,12 @@
 
+-# links here route to the members controller
+
 %ul.nav.nav-tabs
   %li.nav-item
     = tabbed_menu_item('Career', member_path)
-    -# %a.nav-link.active{"aria-current" => "page", href: "#"} Active
   %li.nav-item
     = tabbed_menu_item('Interests', interests_member_path)
+  %li.nav-item
+    = tabbed_menu_item('Votes', votes_member_path)
+  %li.nav-item
+    = tabbed_menu_item('Written Questions', questions_member_path)

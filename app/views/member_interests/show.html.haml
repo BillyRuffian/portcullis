@@ -1,48 +1,32 @@
 
-%turbo-frame#focus
+%turbo-frame#interest
   .card.shadow-sm
     .card-header 
       Registered interests
     .card-body
       .card-text
-        %ul.timeline-with-icons.ms-3.mt-3
-          - @interests.sort_by(&:sort_order).each do |category| 
-            %li.timeline-item.mb-3
-              %span.timeline-icon
-                %i.bi.bi-chat-square-text-fill
-              %h6= category.name
-              %ul.list-group.list-group-flush
-                - category.interests.each do |interest|
-                  %li.list-group-item
-                    %p= interest.interest
-                    %p.text-body-secondary.small
-                      - unless interest.created_when.nil?
-                        %span.badge.text-bg-light.rounded-pill
-                          Created
-                          = interest.created_when.to_date.to_fs(:long_ordinal)
-                      - unless interest.last_amended_when.nil?
-                        %span.badge.text-bg-light.rounded-pill
-                          Updated 
-                          = interest.last_amended_when.to_date.to_fs(:long_ordinal)
-                      - if interest.is_correction
-                        %span.badge.bg-danger.rounded-pill corrected entry
+        - if @interests.empty?
+          No registered interests
+        - else
+          %ul.timeline-with-icons.ms-3.mt-3
+            - @interests.sort_by(&:sort_order).each do |category| 
+              %li.timeline-item.mb-3
+                %span.timeline-icon
+                  %i.bi.bi-chat-square-text-fill
+                %h6= category.name
+                %ul.list-group.list-group-flush
+                  - category.interests.each do |interest|
+                    %li.list-group-item
+                      %p= interest.interest
+                      %p.text-body-secondary.small
+                        - unless interest.created_when.nil?
+                          %span.badge.text-bg-light.rounded-pill
+                            Created
+                            = interest.created_when.to_date.to_fs(:long_ordinal)
+                        - unless interest.last_amended_when.nil?
+                          %span.badge.text-bg-light.rounded-pill
+                            Updated 
+                            = interest.last_amended_when.to_date.to_fs(:long_ordinal)
+                        - if interest.is_correction
+                          %span.badge.bg-danger.rounded-pill corrected entry
 
-
-
-                -# - unless categor.created_when.nil?
-                -#   %strong Created 
-                -#   = interest.created_when.to_fs(:day_and_date)
-          
-              -# %p
-              -#   - if !post.additional_info_link.nil?
-              -#     %a{ href: post.additional_info_link }= post.additional_info 
-              -#   - else 
-              -#     = post.additional_info
-
-              -# %p.text-body-secondary.mb-2
-              -#   House of #{post.house == 1 ? 'Commons' : 'Lords'}. 
-              -#   #{post.start_date.to_date.to_fs(:long_ordinal)}&ndash;#{post.end_date ? post.end_date.to_date.to_fs(:long_ordinal) : 'present' },
-              -#   - if post.end_date.nil? 
-              -#     #{distance_of_time_in_words_to_now(post.start_date)}.
-              -#   - else 
-              -#     #{distance_of_time_in_words(post.start_date, post.end_date)}.

@@ -10,6 +10,12 @@ PATH
     parliament_members (1.0.0)
       typhoeus (~> 1.0, >= 1.0.1)
 
+PATH
+  remote: /home/nbt/Projects/parl_openapi_clients/written_questions/written_questions
+  specs:
+    parliament_written_questions (1.0.0)
+      typhoeus (~> 1.0, >= 1.0.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -276,6 +282,7 @@ DEPENDENCIES
   jbuilder
   parliament_commons_votes!
   parliament_members!
+  parliament_written_questions!
   puma (~> 5.0)
   rails (~> 7.0.6)
   sassc-rails

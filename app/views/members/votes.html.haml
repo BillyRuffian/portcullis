@@ -1,0 +1,11 @@
+%turbo-frame#tabbed_content
+  .container
+    = render partial: 'tabbed_navigation'
+
+    .pt-3.pb-3
+
+      %turbo-frame#votes{ src: member_votes_path(params[:id]) }
+        = render partial: 'shared/spinner'
+
+      -# %turbo-frame#focus{ src: member_interest_path(params[:id]) }
+      -#   = render partial: 'shared/spinner'

@@ -1,0 +1,42 @@
+%turbo-frame#votes
+  .card.shadow-sm
+    .card-header
+      .row
+        .col Commons votes
+        .col.text-end Page #{@page} / #{@total_pages}
+    .card-body
+      %table.table 
+        -@votes.each_pair do |timestamp, day_votes|
+          %thead
+            %tr.table-light.small
+              %th= timestamp.to_date.to_fs(:day_and_date)
+              %th.text-center Vote 
+              %th.text-center For / Against (Total)
+              %th.text-center Result
+          %tbody
+            - day_votes.each do |vote|
+              %tr 
+                %td= CGI.unescape(vote.title)
+                %td.text-center
+                  - if vote.in_affirmative_lobby
+                    %span.badge.text-bg-primary
+                      For
+                  - elsif vote.acted_as_teller 
+                    %span.badge.text-bg-light
+                      Teller 
+                  - else 
+                    %span.badge.text-bg-info
+                      Against 
+                %td.text-center
+                  #{vote.number_in_favour} / #{vote.number_against} (#{vote.number_in_favour + vote.number_against})
+                %td.text-center 
+                  - if vote.number_in_favour > vote.number_against 
+                    %span.badge.text-bg-success
+                      %i.bi.bi-check-lg
+                  - else 
+                    %span.badge.text-bg-danger
+                      %i.bi.bi-x-lg
+
+    .card-footer.text-body-secondary.d-flex.justify-content-end
+      = render partial: 'shared/pagination', locals: {total_pages: @total_pages, page: @page, url_helper: -> (page) {member_votes_path(page: page)}}
+      -# = debug @votes

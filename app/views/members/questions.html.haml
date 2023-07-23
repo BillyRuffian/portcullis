@@ -1,0 +1,8 @@
+%turbo-frame#tabbed_content
+  .container
+    = render partial: 'tabbed_navigation'
+
+    .pt-3.pb-3
+
+      %turbo-frame#questions{ src: member_questions_path(params[:id]) }
+        = render partial: 'shared/spinner'

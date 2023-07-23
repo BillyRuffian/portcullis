@@ -8,6 +8,9 @@ class MembersController < ApplicationController
   def interests
   end
 
+  def votes
+  end
+
   private
 
   def member_params

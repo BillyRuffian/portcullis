@@ -1,0 +1,28 @@
+-# expects: total_pages:integer, page:integer, url_helper:lambda(integer)
+
+%nav{ 'aria-label': '"Page navigation example' }
+  %ul.pagination
+    - page_range = pagination_range(total_pages, page)
+    %li.page-item{ class: page <= 1 ? 'disabled' : nil } 
+      %a.page-link{ href: url_helper.(1) } 
+        %i.bi.bi-skip-start-fill
+    %li.page-item{ class: page <= 1 ? 'disabled' : nil }
+      %a.page-link{ href: url_helper.(page - 1) } 
+        %i.bi.bi-caret-left-fill
+    - if !(page_range).include?(1)
+      %li.page-item.disabled 
+        %a.page-link{ href: '#' }
+          %i.bi.bi-three-dots 
+    - page_range.each do |p|
+      %li.page-item{ class: page == p ? 'disabled' : nil }
+        %a.page-link{ href: url_helper.(p) }= p
+    - if !(page_range).include?(total_pages)
+      %li.page-item.disabled 
+        %a.page-link{ href: '#' }
+          %i.bi.bi-three-dots
+    %li.page-item{ class: page >= total_pages ? 'disabled' : nil }
+      %a.page-link{ href: url_helper.(page + 1) } 
+        %i.bi.bi-caret-right-fill
+    %li.page-item{ class: page >= total_pages ? 'disabled' : nil }
+      %a.page-link{ href: url_helper.(total_pages) } 
+        %i.bi.bi-skip-end-fill
