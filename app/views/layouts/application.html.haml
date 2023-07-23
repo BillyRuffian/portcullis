@@ -9,8 +9,8 @@
     = stylesheet_link_tag "application", "data-turbo-track": "reload"
     = javascript_importmap_tags
   %body.bg-light
-    .modal
-      .modal-dialog.modal-dialog-centered.modal-dialog-scrollable
-        .modal-content 
-          %turbo-frame#modal
+    .modal{ tabindex: -1, data: {controller: 'modal', action: 'turbo:frame-load->modal#open turbo:submit-end->modal#close'} }
+      .modal-dialog.modal-dialog-centered.modal-l
+        %turbo-frame#modal
+
     = yield
