@@ -9,5 +9,8 @@
     = stylesheet_link_tag "application", "data-turbo-track": "reload"
     = javascript_importmap_tags
   %body.bg-light
-    %turbo-frame#modal
+    .modal
+      .modal-dialog.modal-dialog-centered.modal-dialog-scrollable
+        .modal-content 
+          %turbo-frame#modal
     = yield
