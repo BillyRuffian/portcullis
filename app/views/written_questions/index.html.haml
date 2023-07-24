@@ -1,5 +1,5 @@
 %turbo-frame#questions
-  .card.shadow-sm 
+  .card.shadow-sm.p-3
     .card-text
       %ul.timeline-with-icons.ms-3.mt-3
         - @questions.each do |question| 
@@ -14,10 +14,13 @@
                     %h6 Question
                     = question.question_text 
                   .col-6 
-                    %h6 Answer from #{question.answering_member.name_display_as}
+                    %h6
+                      = question.answering_body.name
+                      %span.text-secondary.small= question.answering_member.name_display_as
                     = question.answer_text
               .card-footer.text-body-secondary.d-flex.justify-content-end
-                %a{ href: question_path(question.id), 'data-turbo-frame' => 'modal' } 
+                %a{ 
+                    href: question_path(question.id), 'data-turbo-frame' => 'modal' } 
                   More 
                   %i.bi.bi-box-arrow-up-right
 

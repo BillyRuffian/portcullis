@@ -10,7 +10,7 @@
     = javascript_importmap_tags
   %body.bg-light
     .modal{ tabindex: -1, data: {controller: 'modal', action: 'turbo:frame-load->modal#open turbo:submit-end->modal#close'} }
-      .modal-dialog.modal-dialog-centered.modal-l
+      .modal-dialog.modal-xl.modal-dialog-centered
         %turbo-frame#modal
 
     = yield

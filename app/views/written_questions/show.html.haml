@@ -4,8 +4,28 @@
       %h5.modal-title= @question.heading
       %button.btn-close{ type: 'button',  'data-bs-dismiss' => 'modal', 'aria-label' => 'Close' }
     .modal-body 
-      %p= @question.question_text.html_safe
+      .row
+        .col-2
+          %a{ href: member_path(@question.asking_member_id)}
+            %img.img-thumbnail{ src: "https://members-api.parliament.uk/api/Members/#{@question.asking_member_id}/Thumbnail"}
+        .col-10
+          %h6= @question.date_answered.to_date.to_fs(:day_and_date)
+          - if @question.member_has_interest
+            %p.text-danger Member declared an interest
+          = sanitize @question.question_text
+      
       %hr/
-      %p= @question.answer_text.html_safe
+
+      .row
+        .col-2
+          %a{ href: member_path(@question.answering_member_id), 'data-turbo-frame' => '_top'}
+            %img.img-thumbnail{ src: "https://members-api.parliament.uk/api/Members/#{@question.answering_member_id}/Thumbnail"}
+        .col-10
+          %h5= @question.answering_body_name
+          %h6 
+            = @question.date_answered.to_date.to_fs(:day_and_date)
+            - if @question.answer_is_correction 
+              (corrected on #{@question.date_answer_corrected.to_date.to_fs(:day_and_date)})
+          = sanitize @question.answer_text
     .modal-footer 
       Footer 
