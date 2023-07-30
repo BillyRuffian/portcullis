@@ -1,40 +1,21 @@
-%turbo-frame#modal
-  .modal-content 
-    .modal-header 
-      %h5.modal-title
-        = @debate.dig('Overview', 'Title')
-        %small (#{@debate.dig('Overview', 'Location')})
-      %button.btn-close{ type: 'button',  'data-bs-dismiss' => 'modal', 'aria-label' => 'Close' }
-    .modal-body
+%turbo-frame#contributions
+  .card 
+    .card-header
+      .row
+        .col 
+          %nav
+            %ol.breadcrumb
+              %li.breadcrumb-item
+                %a{ href: member_contributions_path(params[:member_id]) } Spoken contributions
+              %li.breadcrumb-item.active= @debate.dig('Overview', 'Title')
+
+        .col.text-end= @debate.dig('Overview', 'Location')
+    .card-body
       - @debate['Items'].reject{ |i| i['MemberId'].nil? }.each do |item| 
         .row.border-bottom.m-3.pb-3
-          .col-2 
-            %img.img-thumbnail{ src: "https://members-api.parliament.uk/api/Members/#{item['MemberId']}/Thumbnail"}
+          .col-2
+            %a{ href: member_path(item['MemberId']), 'data-turbo-frame' => '_top'}
+              %img.img-thumbnail{ src: "https://members-api.parliament.uk/api/Members/#{item['MemberId']}/Thumbnail"}
           .col-10 
             %h6= item['AttributedTo']
             %p= strip_tags item['Value']
-      -# .row
-      -#   .col-2
-      -#     %a{ href: member_path(@question.asking_member_id)}
-      -#       %img.img-thumbnail{ src: "https://members-api.parliament.uk/api/Members/#{@question.asking_member_id}/Thumbnail"}
-      -#   .col-10
-      -#     %h6= @question.date_answered.to_date.to_fs(:day_and_date)
-      -#     - if @question.member_has_interest
-      -#       %p.text-danger Member declared an interest
-      -#     = sanitize @question.question_text
-      
-      -# %hr/
-
-      -# .row
-      -#   .col-2
-      -#     %a{ href: member_path(@question.answering_member_id), 'data-turbo-frame' => '_top'}
-      -#       %img.img-thumbnail{ src: "https://members-api.parliament.uk/api/Members/#{@question.answering_member_id}/Thumbnail"}
-      -#   .col-10
-      -#     %h5= @question.answering_body_name
-      -#     %h6 
-      -#       = @question.date_answered.to_date.to_fs(:day_and_date)
-      -#       - if @question.answer_is_correction 
-      -#         (corrected on #{@question.date_answer_corrected.to_date.to_fs(:day_and_date)})
-      -#     = sanitize @question.answer_text
-    .modal-footer 
-      Footer 

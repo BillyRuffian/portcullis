@@ -5,7 +5,7 @@ export default class extends Controller {
   connect() {
   }
 
-  greet( {params: {divtarget} } ){
+  scroll( {params: {divtarget} } ){
     document.getElementById(divtarget).scrollIntoView()
   }
 }
