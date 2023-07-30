@@ -10,4 +10,8 @@ class ConstituenciesController < ApplicationController
     end
     task.wait
   end
+
+  def geometry
+    render json: JSON.parse(locations_api.api_location_constituency_id_geometry_get(params[:id]).value)
+  end
 end

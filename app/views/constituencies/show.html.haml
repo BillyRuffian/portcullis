@@ -7,6 +7,9 @@
         .card-text 
           %p= strip_tags @summary
 
+          #map.leaflet-container{ style: 'min-height: 400px' }
+            %div{ data: { controller: 'map', 'map-geourl-value': geometry_constituency_path(@constituency.id) } } 
+      
     .card.mb-3.shadow-sm 
       .card-header= @election_results.election_title
       .card-body
