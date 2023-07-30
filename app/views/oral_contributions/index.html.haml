@@ -14,7 +14,7 @@
               %li.timeline-item.mb-3
                 %span.timeline-icon
                   %i.bi.bi-chat-dots-fill
-                %h6= link_to(contribution.debate_title, contribution_path(contribution.debate_website_id, member_id: params[:member_id]), data: {controller: 'scroller', action: 'click->scroller#scroll', scroller_divtarget_param: 'contributions'})
+                %h6= link_to(contribution.debate_title, contribution_path(contribution.debate_website_id, page: @page, member_id: params[:member_id]), data: {controller: 'scroller', action: 'click->scroller#scroll', scroller_divtarget_param: 'contributions'})
                 %p
                   = contribution.sitting_date.to_date.to_fs(:day_and_date)
                   - if contribution.first_timecode

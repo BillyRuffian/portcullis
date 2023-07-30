@@ -17,7 +17,7 @@
                 %ul.list-group.list-group-flush
                   - category.interests.each do |interest|
                     %li.list-group-item
-                      %p= interest.interest
+                      %p= sanitize interest.interest
                       %p.text-body-secondary.small
                         - unless interest.created_when.nil?
                           %span.badge.text-bg-light.rounded-pill

@@ -6,7 +6,7 @@
           %nav
             %ol.breadcrumb
               %li.breadcrumb-item
-                %a{ href: member_contributions_path(params[:member_id]) } Spoken contributions
+                %a{ href: member_contributions_path(params[:member_id], page: @page) } Spoken contributions
               %li.breadcrumb-item.active= @debate.dig('Overview', 'Title')
 
         .col.text-end= @debate.dig('Overview', 'Location')
@@ -18,4 +18,4 @@
               %img.img-thumbnail{ src: "https://members-api.parliament.uk/api/Members/#{item['MemberId']}/Thumbnail"}
           .col-10 
             %h6= item['AttributedTo']
-            %p= strip_tags item['Value']
+            %p= sanitize item['Value']

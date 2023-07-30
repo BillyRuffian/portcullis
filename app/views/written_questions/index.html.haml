@@ -1,8 +1,10 @@
 %turbo-frame#questions
-  .card.shadow-sm.p-3
-    .card-text
-      PAGINATION
-
+  .card.shadow-sm
+    .card-header 
+      .row
+        .col Written questions
+        .col.text-end Page #{@page} / #{@total_pages}
+    .card-text.p-3
       %ul.timeline-with-icons.ms-3.mt-3
         - @questions.each do |question| 
           %li.timeline-item.mb-5
@@ -18,11 +20,14 @@
                   .col-6 
                     %h6
                       = question.answering_body.name
-                      %span.text-secondary.small= question.answering_member.name_display_as
+                      - if question.answering_member.respond_to?(:name_display_as)
+                        %span.text-secondary.small= question.answering_member.name_display_as
                     = question.answer_text
               .card-footer.text-body-secondary.d-flex.justify-content-end
                 %a{ 
                     href: question_path(question.id), 'data-turbo-frame' => 'modal' } 
                   More 
+    .card-footer.text-body-secondary.d-flex.justify-content-end
+      = render partial: 'shared/pagination', locals: {total_pages: @total_pages, page: @page, url_helper: -> (page) {member_questions_path(page: page)}, scroll_to: 'questions'}
 
            

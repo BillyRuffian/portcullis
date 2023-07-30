@@ -11,3 +11,4 @@ pin "bootstrap", to: 'bootstrap.min.js', preload: true
 
 pin "chartkick", to: "chartkick.js", preload: true
 pin "Chart.bundle", to: "Chart.bundle.js", preload: true
+pin "leaflet", to: "https://ga.jspm.io/npm:leaflet@1.9.4/dist/leaflet-src.js"

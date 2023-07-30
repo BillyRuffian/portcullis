@@ -21,16 +21,16 @@
           .row.mb-3
             .col-6.text-center
               %h6.card-title Latest election results 
-              = pie_chart @election_results.candidates.sort_by(&:rank_order).map{ |c| [c.party.name, c.votes] }, colors: @election_results.candidates.sort_by(&:rank_order).map { |c| "##{c.party.background_colour}"}, legend: 'bottom'
+              = pie_chart @election_results.candidates.sort_by(&:rank_order).map{ |c| [c.party.name, c.votes] }, colors: @election_results.candidates.sort_by(&:rank_order).map { |c| "##{c.party.background_colour}"}, legend: 'bottom', thousands: ','
             .col-6.text-center
               %h6.card-title Change in vote share
-              = column_chart @election_results.candidates.sort_by(&:rank_order).map{ |c| [c.party.abbreviation, c.result_change.to_f] }, suffix: '%', colors: @election_results.candidates.sort_by(&:rank_order).map { |c| "##{c.party.background_colour}"}
+              = column_chart @election_results.candidates.sort_by(&:rank_order).map{ |c| [c.party.abbreviation, c.result_change.to_f] }, suffix: '%', colors: @election_results.candidates.sort_by(&:rank_order).map { |c| "##{c.party.background_colour}"}, thousands: ','
           .row.mb-3.text-center
             %h6.card-title Candidates
             - @election_results.candidates.sort_by(&:rank_order).each_slice(5) do |cs| 
-              %ul.list-group.list-group-horizontal.justify-content-center
+              %ul.list-inline.justify-content-center
                 - cs.each do |c| 
-                  %li.list-group-item
+                  %li.list-inline-item.px-2
                     %span.badge{ style: "background: ##{c.party.background_colour || '555'}; color: ##{c.party.foreground_colour}"}= c.party.abbreviation
                     = c.name
           

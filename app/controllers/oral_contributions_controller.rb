@@ -15,6 +15,7 @@ class OralContributionsController < ApplicationController
 
   def show
     @member_id = params[:member_id]
+    @page = params[:page] || 1
     @debate = HTTP
                 .get("https://hansard-api.parliament.uk/Debates/Debate/#{params[:id]}.json")
                 .to_s
