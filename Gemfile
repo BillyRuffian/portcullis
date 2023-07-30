@@ -82,3 +82,5 @@ gem 'parliament_commons_votes', path: '/home/nbt/Projects/parl_openapi_clients/c
 gem 'parliament_written_questions', path: '/home/nbt/Projects/parl_openapi_clients/written_questions/written_questions'
 
 gem "chartkick", "~> 5.0"
+
+gem "async", "~> 2.6"

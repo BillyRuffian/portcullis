@@ -1,2 +1,61 @@
-%h1 Constituencies#show
-%p Find me in app/views/constituencies/show.html.haml
+%section.mb-3
+  .container 
+
+    .card.mb-3.shadow-sm 
+      .card-body 
+        %h5.card-title= @constituency.name
+        .card-text 
+          %p= strip_tags @summary
+
+    .card.mb-3.shadow-sm 
+      .card-header= @election_results.election_title
+      .card-body
+        .card-text 
+          .row.mb-3.text-center
+            - @election_results.candidates.sort_by(&:rank_order).first.then do |winner|
+              %h3 #{winner.party.name} majority of #{number_with_delimiter(@election_results.majority)}
+              %h3.small.text-body-secondary 
+                turnout #{number_with_delimiter(@election_results.turnout)}
+                from an electorate of #{number_with_delimiter(@election_results.electorate)}
+                (#{number_to_percentage((@election_results.turnout.to_f / @election_results.electorate.to_f) * 100, precision: 2)})
+          .row.mb-3
+            .col-6.text-center
+              %h6.card-title Latest election results 
+              = pie_chart @election_results.candidates.sort_by(&:rank_order).map{ |c| [c.party.name, c.votes] }, colors: @election_results.candidates.sort_by(&:rank_order).map { |c| "##{c.party.background_colour}"}, legend: 'bottom'
+            .col-6.text-center
+              %h6.card-title Change in vote share
+              = column_chart @election_results.candidates.sort_by(&:rank_order).map{ |c| [c.party.abbreviation, c.result_change.to_f] }, suffix: '%', colors: @election_results.candidates.sort_by(&:rank_order).map { |c| "##{c.party.background_colour}"}
+          .row.mb-3.text-center
+            %h6.card-title Candidates
+            - @election_results.candidates.sort_by(&:rank_order).each_slice(5) do |cs| 
+              %ul.list-group.list-group-horizontal.justify-content-center
+                - cs.each do |c| 
+                  %li.list-group-item
+                    %span.badge{ style: "background: ##{c.party.background_colour || '555'}; color: ##{c.party.foreground_colour}"}= c.party.abbreviation
+                    = c.name
+          
+    .card.mb-3.shadow-sm 
+      .card-header Election history 
+      .card-body
+        .card-text
+          %table.table
+            %thead 
+              %tr 
+                %th/ 
+                %th Date 
+                %th Election title 
+                %th Result
+                %th Majority 
+                %th Turnout 
+                
+            %tbody 
+              - @election_history.sort_by(&:election_date).reverse.each do |election| 
+                %tr
+                  %td 
+                    %i.bi.bi-square-fill{ style: "color: ##{election.winning_party.background_colour}"}
+                  %td= election.election_date.to_date.to_fs(:long)
+                  %td= election.election_title 
+                  %td= election.result
+                  %td= number_with_delimiter(election.majority)
+                  %td= number_to_percentage((election.turnout.to_f / election.electorate.to_f) * 100, precision: 2)
+            

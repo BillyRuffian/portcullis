@@ -86,6 +86,11 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.4)
       public_suffix (>= 2.0.2, < 6.0)
+    async (2.6.2)
+      console (~> 1.10)
+      fiber-annotation
+      io-event (~> 1.1)
+      timers (~> 4.1)
     autoprefixer-rails (10.4.13.0)
       execjs (~> 2)
     bindex (0.8.1)
@@ -107,6 +112,9 @@ GEM
       xpath (~> 3.2)
     chartkick (5.0.2)
     concurrent-ruby (1.2.2)
+    console (1.18.0)
+      fiber-annotation
+      fiber-local
     crass (1.0.6)
     date (3.3.3)
     debug (1.8.0)
@@ -118,6 +126,8 @@ GEM
       ffi (>= 1.15.0)
     execjs (2.8.1)
     ffi (1.15.5)
+    fiber-annotation (0.2.0)
+    fiber-local (1.0.0)
     globalid (1.1.0)
       activesupport (>= 5.0)
     haml (6.1.1)
@@ -140,6 +150,7 @@ GEM
       actionpack (>= 6.0.0)
       railties (>= 6.0.0)
     io-console (0.6.0)
+    io-event (1.2.3)
     irb (1.7.4)
       reline (>= 0.3.6)
     jbuilder (2.11.5)
@@ -242,6 +253,7 @@ GEM
     thor (1.2.2)
     tilt (2.2.0)
     timeout (0.4.0)
+    timers (4.3.5)
     turbo-rails (1.4.0)
       actionpack (>= 6.0.0)
       activejob (>= 6.0.0)
@@ -271,6 +283,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  async (~> 2.6)
   bootsnap
   bootstrap (~> 5.2)
   capybara
