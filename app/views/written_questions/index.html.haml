@@ -1,6 +1,8 @@
 %turbo-frame#questions
   .card.shadow-sm.p-3
     .card-text
+      PAGINATION
+
       %ul.timeline-with-icons.ms-3.mt-3
         - @questions.each do |question| 
           %li.timeline-item.mb-5
@@ -22,7 +24,5 @@
                 %a{ 
                     href: question_path(question.id), 'data-turbo-frame' => 'modal' } 
                   More 
-                  %i.bi.bi-box-arrow-up-right
 
-  = debug @questions        
            

@@ -38,5 +38,5 @@
                       %i.bi.bi-x-lg
 
     .card-footer.text-body-secondary.d-flex.justify-content-end
-      = render partial: 'shared/pagination', locals: {total_pages: @total_pages, page: @page, url_helper: -> (page) {member_votes_path(page: page)}}
+      = render partial: 'shared/pagination', locals: {total_pages: @total_pages, page: @page, url_helper: -> (page) {member_votes_path(page: page)}, scroll_to: 'votes'}
       -# = debug @votes

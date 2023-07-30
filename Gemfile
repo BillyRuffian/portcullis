@@ -84,3 +84,5 @@ gem 'parliament_written_questions', path: '/home/nbt/Projects/parl_openapi_clien
 gem "chartkick", "~> 5.0"
 
 gem "async", "~> 2.6"
+
+gem "http", "~> 5.1"

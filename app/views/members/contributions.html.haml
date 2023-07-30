@@ -4,5 +4,5 @@
 
     .pt-3.pb-3
 
-      %turbo-frame#votes{ src: member_votes_path(params[:id]) }
+      %turbo-frame#contributions{ src: member_contributions_path(params[:id]) }
         = render partial: 'shared/spinner'

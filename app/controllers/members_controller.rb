@@ -11,6 +11,9 @@ class MembersController < ApplicationController
   def votes
   end
 
+  def contributions
+  end
+
   private
 
   def member_params

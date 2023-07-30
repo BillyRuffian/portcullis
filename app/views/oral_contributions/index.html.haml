@@ -1,0 +1,24 @@
+%turbo-frame#contributions
+  .card.shadow-sm
+    .card-header
+      .row
+        .col Spoken contributions
+        .col.text-end Page #{@page} / #{@total_pages}
+    .card-body
+      .card-text
+        - if @contributions.empty?
+          No spoken contributions
+        - else
+          %ul.timeline-with-icons.ms-3.mt-3
+            - @contributions.each do |contribution| 
+              %li.timeline-item.mb-3
+                %span.timeline-icon
+                  %i.bi.bi-chat-dots-fill
+                %h6= link_to(contribution.debate_title, contribution_path(contribution.debate_website_id, member_id: params[:member_id]), 'data-turbo-frame' => 'modal')
+                %p
+                  = contribution.sitting_date.to_date.to_fs(:day_and_date)
+                  - if contribution.first_timecode
+                    = contribution.first_timecode.to_fs(:time)
+                  = contribution.section
+    .card-footer.text-body-secondary.d-flex.justify-content-end
+      = render partial: 'shared/pagination', locals: {total_pages: @total_pages, page: @page, url_helper: -> (page) {member_contributions_path(page: page)}, scroll_to: 'contributions'}

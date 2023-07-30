@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'written_questions/index'
 
   namespace :commons do
     resources :divisions, only: [:index]
@@ -14,17 +13,20 @@ Rails.application.routes.draw do
     resource :member_interest, as: :interest, only: :show
     resources :commons_votes, as: :votes, only: :index
     resources :written_questions, as: :questions, only: :index
+    resources :oral_contributions, as: :contributions, only: :index 
 
     # these resources link to actions in the members controller
     member do
       get 'interests'
       get 'votes'
       get 'questions'
+      get 'contributions'
     end
   end
 
   resources :written_questions, as: :questions, only: :show
-  resources :parties, only: [:index]
+  resources :oral_contributions, as: :contributions, only: :show
+  resources :parties, only: :index
   resources :constituencies, only: :show
 
   # get 'parties/index'
