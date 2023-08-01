@@ -1,17 +1,17 @@
 PATH
-  remote: /home/nbt/Projects/parl_openapi_clients/commons_votes/commons_votes
+  remote: vendor/gems/parliament_commons_votes-1.0.0
   specs:
     parliament_commons_votes (1.0.0)
       typhoeus (~> 1.0, >= 1.0.1)
 
 PATH
-  remote: /home/nbt/Projects/parl_openapi_clients/members/members
+  remote: vendor/gems/parliament_members-1.0.0
   specs:
     parliament_members (1.0.0)
       typhoeus (~> 1.0, >= 1.0.1)
 
 PATH
-  remote: /home/nbt/Projects/parl_openapi_clients/written_questions/written_questions
+  remote: vendor/gems/parliament_written_questions-1.0.0
   specs:
     parliament_written_questions (1.0.0)
       typhoeus (~> 1.0, >= 1.0.1)

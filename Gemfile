@@ -77,9 +77,9 @@ gem "bootstrap", "~> 5.2"
 
 gem "html2haml", "~> 2.3"
 
-gem 'parliament_members', path: '/home/nbt/Projects/parl_openapi_clients/members/members'
-gem 'parliament_commons_votes', path: '/home/nbt/Projects/parl_openapi_clients/commons_votes/commons_votes'
-gem 'parliament_written_questions', path: '/home/nbt/Projects/parl_openapi_clients/written_questions/written_questions'
+gem 'parliament_members', path: 'vendor/gems/parliament_members-1.0.0'
+gem 'parliament_commons_votes', path: 'vendor/gems/parliament_commons_votes-1.0.0'
+gem 'parliament_written_questions', path: 'vendor/gems/parliament_written_questions-1.0.0'
 
 gem "chartkick", "~> 5.0"
 
