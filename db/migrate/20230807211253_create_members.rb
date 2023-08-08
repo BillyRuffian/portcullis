@@ -1,7 +1,7 @@
 class CreateMembers < ActiveRecord::Migration[7.0]
   def change
     create_table :members do |t|
-      t.integer :member_id
+      t.integer :member_ref
       t.integer :house
       t.string :list_as
       t.string :display_as
@@ -15,6 +15,6 @@ class CreateMembers < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
-    add_index :members, :member_id, unique: true
+    add_index :members, :member_ref, unique: true
   end
 end

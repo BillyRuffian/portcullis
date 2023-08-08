@@ -1,7 +1,7 @@
 class CreateParties < ActiveRecord::Migration[7.0]
   def change
     create_table :parties do |t|
-      t.integer :party_id
+      t.integer :party_ref
       t.string :name
       t.string :abbreviation
       t.string :background_hex
@@ -12,6 +12,6 @@ class CreateParties < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
-    add_index :parties, :party_id, unique: true
+    add_index :parties, :party_ref, unique: true
   end
 end

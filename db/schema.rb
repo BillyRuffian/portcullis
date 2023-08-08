@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema[7.0].define(version: 2023_08_07_211253) do
   create_table "members", force: :cascade do |t|
-    t.integer "member_id"
+    t.integer "member_ref"
     t.integer "house"
     t.string "list_as"
     t.string "display_as"
@@ -25,12 +25,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_07_211253) do
     t.integer "party_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["member_id"], name: "index_members_on_member_id", unique: true
+    t.index ["member_ref"], name: "index_members_on_member_ref", unique: true
     t.index ["party_id"], name: "index_members_on_party_id"
   end
 
   create_table "parties", force: :cascade do |t|
-    t.integer "party_id"
+    t.integer "party_ref"
     t.string "name"
     t.string "abbreviation"
     t.string "background_hex"
@@ -40,7 +40,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_07_211253) do
     t.boolean "independent_party"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["party_id"], name: "index_parties_on_party_id", unique: true
+    t.index ["party_ref"], name: "index_parties_on_party_ref", unique: true
   end
 
   add_foreign_key "members", "parties"
