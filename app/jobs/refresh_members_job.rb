@@ -2,13 +2,19 @@ class RefreshMembersJob < ApplicationJob
   queue_as :default
 
   def perform(start: 1, batch: 10, upto: 5_000)
-    members = fetch_members_batch(start...(start+batch))
+    logger.debug { "Starting batch from #{start}, batch of #{batch}, up to #{upto}"}
+    batch_upper_limit = start + batch  >= upto ? upto : start + batch
+    members = fetch_members_batch(start...batch_upper_limit)
     members.each do |member|
+      if member.latest_party.nil?
+        logger.warn { "Unable to process member id #{member.id}, #{member.name_display_as}, no party association" }
+        next
+      end
       upsert_party(member.latest_party)
       upsert_member(member)
     end
 
-    RefreshMembersJob.set(wait: 10.seconds).perform_later(start: start+batch-1, batch:, upto:) if start < upto
+    RefreshMembersJob.set(wait: 10.seconds).perform_later(start: start+batch, batch:, upto:) if start < upto
     members.count
   end
 
