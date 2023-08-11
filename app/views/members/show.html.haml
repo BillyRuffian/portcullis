@@ -2,28 +2,28 @@
 %section.mb-3
   .container 
     .card
-      .card-header{ style: "background-color: ##{@member.party_bg}" }
+      .card-header{ style: "background-color: ##{@member.party.background_hex}" }
       .row.g-0
         .col-md-3
-          %img.img-thumbnail.img-fluid.rounded{alt: "Official photograph of #{@member.name_address_as}", src: @member.thumbnail_url}/
+          %img.img-thumbnail.img-fluid.rounded{alt: "Official photograph of #{@member.address_as}", src: @member.thumbnail_url}/
         .col-md-9
           .card-body
-            %h5.card-title= @member.name_full_title
-            %h6.card-subtitle.text-body-secondary.mb-3= @member.latest_party.name
+            %h5.card-title= @member.full_title
+            %h6.card-subtitle.text-body-secondary.mb-3= @member.party.name
             %p.card-text 
-              = @member.name_display_as
+              = @member.display_as
               #{@member.current? ? 'has been' : 'was'} a member of the House of #{@member.lords? ? 'Lords' : 'Commons'} 
               #{@member.current? ? 'since' : 'between'}
-              = @member.latest_house_membership.membership_start_date.to_date.to_fs(:long_ordinal)
+              = @member.start_date.to_date.to_fs(:long_ordinal)
               - if !@member.current?
-                and #{@member.latest_house_membership.membership_end_date.to_date.to_fs(:long_ordinal)},
-                #{distance_of_time_in_words(@member.latest_house_membership.membership_start_date, @member.latest_house_membership.membership_end_date)}.
+                and #{@member.end_date.to_date.to_fs(:long_ordinal)},
+                #{distance_of_time_in_words(@member.start_date, @member.end_date)}.
               - else
-                or #{distance_of_time_in_words(@member.latest_house_membership.membership_start_date, Date.today)}.
+                or #{distance_of_time_in_words(@member.start_date, Date.today)}.
             - if @member.commons?
               %p.card-text
-                #{@member.pronoun_subjective.capitalize} #{@member.current? ? 'represents' : 'last represented'} the
-                %a{href: constituency_path(@member.latest_house_membership.membership_from_id )}= @member.latest_house_membership.membership_from
+                they #{@member.current? ? 'represents' : 'last represented'} the
+                %a{href: constituency_path(@member.constituency_ref )}= @member.constituency_name
                 constituency.
 
 %section 

@@ -1,7 +1,7 @@
 class RefreshMembersJob < ApplicationJob
   queue_as :default
 
-  def perform(start: 1, batch: 10, upto: 5_000)
+  def perform(start: 1, batch: 10, upto: 5_000, pause: 10)
     logger.debug { "Starting batch from #{start}, batch of #{batch}, up to #{upto}"}
     batch_upper_limit = start + batch  >= upto ? upto : start + batch
     members = fetch_members_batch(start...batch_upper_limit)
@@ -14,7 +14,7 @@ class RefreshMembersJob < ApplicationJob
       upsert_member(member)
     end
 
-    RefreshMembersJob.set(wait: 10.seconds).perform_later(start: start+batch, batch:, upto:) if start < upto
+    RefreshMembersJob.set(wait: pause.seconds).perform_later(start: start+batch, batch:, upto:) if start < upto
     members.count
   end
 
@@ -61,7 +61,10 @@ class RefreshMembersJob < ApplicationJob
       gender: member.gender,
       start_date: member.latest_house_membership.membership_start_date,
       end_date: member.latest_house_membership.membership_end_date,
-      end_reason: member.latest_house_membership.membership_end_reason
+      end_reason: member.latest_house_membership.membership_end_reason,
+      thumbnail_url: member.thumbnail_url,
+      constituency_name: member.latest_house_membership&.membership_from,
+      constituency_ref: member.latest_house_membership&.membership_from_id
     }, unique_by: :member_ref)
   end
 

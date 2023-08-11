@@ -3,8 +3,8 @@
     = render partial: 'tabbed_navigation'
 
     .pt-3.pb-3
-      %turbo-frame#contact{ src: member_contact_path(@member.id) }
+      %turbo-frame#contact{ src: member_contact_path(@member.member_ref) }
         = render partial: 'shared/spinner'
 
-      %turbo-frame#biography{ src: member_biography_path(@member.id) }
+      %turbo-frame#biography{ src: member_biography_path(@member.member_ref) }
         = render partial: 'shared/spinner'

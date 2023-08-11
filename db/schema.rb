@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_07_211253) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_11_202257) do
   create_table "members", force: :cascade do |t|
     t.integer "member_ref"
     t.integer "house"
@@ -25,6 +25,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_07_211253) do
     t.integer "party_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "thumbnail_url"
+    t.string "constituency_name"
+    t.integer "constituency_ref"
+    t.index ["constituency_ref"], name: "index_members_on_constituency_ref"
     t.index ["member_ref"], name: "index_members_on_member_ref", unique: true
     t.index ["party_id"], name: "index_members_on_party_id"
   end
