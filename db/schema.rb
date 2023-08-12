@@ -10,7 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_11_202257) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_12_204433) do
+  create_table "constituencies", force: :cascade do |t|
+    t.integer "constituency_ref"
+    t.string "name"
+    t.date "start_date"
+    t.date "end_date"
+    t.text "geometry"
+    t.integer "member_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["constituency_ref"], name: "index_constituencies_on_constituency_ref"
+    t.index ["member_id"], name: "index_constituencies_on_member_id"
+  end
+
   create_table "members", force: :cascade do |t|
     t.integer "member_ref"
     t.integer "house"
@@ -47,5 +60,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_11_202257) do
     t.index ["party_ref"], name: "index_parties_on_party_ref", unique: true
   end
 
+  add_foreign_key "constituencies", "members"
   add_foreign_key "members", "parties"
 end
