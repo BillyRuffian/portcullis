@@ -5,10 +5,11 @@ class Member < ApplicationRecord
 
   scope :search, -> (name) do 
     where( 'display_as LIKE ?', "%#{name}%")
-      .where(end_date: nil)
       .order(:display_as)
       .limit(15)
   end
+
+  scope :current, -> { where(end_date: nil) }
 
   def current?
     end_date.nil?
@@ -20,5 +21,9 @@ class Member < ApplicationRecord
 
   def lords?
     house == 'lords'
+  end
+
+  def address_as
+    @address_as || display_as
   end
 end

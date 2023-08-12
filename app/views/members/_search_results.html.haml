@@ -1,7 +1,9 @@
 -# Search results
 -# expects members : [Member]
 
-%turbo-frame#members 
-  %ul 
-    - members.each do |member| 
-      %li= member.display_as
+%turbo-frame#members
+  - unless members.empty?
+    .card.shadow-sm.mb-3
+      .card-body
+        - members.each do |member|
+          = render partial: 'shared/member_card', locals: { member: }

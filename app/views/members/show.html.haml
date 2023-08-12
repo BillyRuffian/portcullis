@@ -22,7 +22,7 @@
                 or #{distance_of_time_in_words(@member.start_date, Date.today)}.
             - if @member.commons?
               %p.card-text
-                they #{@member.current? ? 'represents' : 'last represented'} the
+                They #{@member.current? ? 'represents' : 'last represented'} the
                 %a{href: constituency_path(@member.constituency_ref )}= @member.constituency_name
                 constituency.
 

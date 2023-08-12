@@ -1,0 +1,9 @@
+-# expects member : Member
+
+.card.my-2
+  .card-body
+    .row
+      .col-1
+        %img.img-fluid.rounded-start.m-n3{ src: member.thumbnail_url }
+      .col
+        %a.text-decoration-none.stretched-link{href: member_path(member.member_ref), data: {turbo_frame: '_top'}}= member.display_as
