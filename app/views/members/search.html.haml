@@ -4,6 +4,17 @@
       %h1.card-title Search for a member 
 
       = form_with url: search_members_path, method: :get, data: {turbo_frame: 'members', turbo_action: 'advance', controller: 'automatic-form-submission'} do |f|
-        = f.text_field :query, data: {action: 'input->automatic-form-submission#search'}, autocomplete: 'off', class: 'form-control form-control-lg', placeholder: 'Name'
+        .mb-3
+          = f.text_field :query, data: {action: 'input->automatic-form-submission#search'}, autocomplete: 'off', class: 'form-control form-control-lg', placeholder: 'Name'
+        .mb-3
+          .form-check.form-check-inline 
+            = f.radio_button :house, 'all', class: 'form-check-input', data: {action: 'input->automatic-form-submission#search'}
+            = f.label :house_all, 'Both houses', class: 'form-check-label'
+          .form-check.form-check-inline
+            = f.radio_button :house, 'commons', class: 'form-check-input', data: {action: 'input->automatic-form-submission#search'}
+            = f.label :house_commons, 'Commons', class: 'form-check-label'
+          .form-check.form-check-inline
+            = f.radio_button :house, 'lords', class: 'form-check-input', data: {action: 'input->automatic-form-submission#search'}
+            = f.label :house_lords, 'Lords', class: 'form-check-label'
 
   %turbo-frame#members

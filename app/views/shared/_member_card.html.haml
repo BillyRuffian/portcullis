@@ -1,9 +1,12 @@
 -# expects member : Member
 
 .card.my-2
-  .card-body
-    .row
-      .col-1
-        %img.img-fluid.rounded-start.m-n3{ src: member.thumbnail_url }
-      .col
-        %a.text-decoration-none.stretched-link{href: member_path(member.member_ref), data: {turbo_frame: '_top'}}= member.display_as
+  .row.g-0 
+    .col-md-4
+      %img.img-fluid.rounded-start{ src: member.thumbnail_url }
+    .col.md-8
+      .card-body
+        .card-text
+          %a.text-decoration-none.stretched-link{href: member_path(member.member_ref), data: {turbo_frame: '_top'}}= member.display_as
+        .card-text.text-body-secondary
+          = member.party.name

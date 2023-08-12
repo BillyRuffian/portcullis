@@ -18,6 +18,8 @@ class MembersController < ApplicationController
   def search
     if params[:query].present?
       @members = Member.includes(:party).current.search(params[:query])
+      @members = @members.commons if params[:house] == 'commons'
+      @members = @members.lords if params[:house] == 'lords'
     else
       @members = []
     end
