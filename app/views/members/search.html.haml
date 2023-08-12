@@ -8,7 +8,7 @@
           = f.text_field :query, data: {action: 'input->automatic-form-submission#search'}, autocomplete: 'off', class: 'form-control form-control-lg', placeholder: 'Name'
         .mb-3
           .form-check.form-check-inline 
-            = f.radio_button :house, 'all', class: 'form-check-input', data: {action: 'input->automatic-form-submission#search'}
+            = f.radio_button :house, 'all', class: 'form-check-input', data: {action: 'input->automatic-form-submission#search'}, checked: true
             = f.label :house_all, 'Both houses', class: 'form-check-label'
           .form-check.form-check-inline
             = f.radio_button :house, 'commons', class: 'form-check-input', data: {action: 'input->automatic-form-submission#search'}
