@@ -22,6 +22,10 @@ Rails.application.routes.draw do
       get 'questions'
       get 'contributions'
     end
+
+    collection do 
+      get 'search'
+    end
   end
 
   resources :written_questions, as: :questions, only: :show

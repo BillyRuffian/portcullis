@@ -1,0 +1,7 @@
+-# Search results
+-# expects members : [Member]
+
+%turbo-frame#members 
+  %ul 
+    - members.each do |member| 
+      %li= member.display_as

@@ -1,0 +1,8 @@
+%h1 Search for a member 
+
+= form_with url: search_members_path, method: :get, data: {turbo_frame: 'members', turbo_action: 'advance', controller: 'automatic-form-submission'} do |f|
+  = f.label :query, 'Search by name'
+  = f.text_field :query, data: {action: 'input->automatic-form-submission#search'} 
+  = f.submit 'Search', name: nil
+
+%turbo-frame#members 

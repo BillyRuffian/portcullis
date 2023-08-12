@@ -15,6 +15,20 @@ class MembersController < ApplicationController
   def contributions
   end
 
+  def search
+    if params[:query].present?
+      @members = Member.search(params[:query])
+    else
+      @members = []
+    end
+
+    if turbo_frame_request?
+      render partial: 'search_results', locals: {members: @members}
+    else
+      render 'search'
+    end
+  end
+
   private
 
   def member_params
