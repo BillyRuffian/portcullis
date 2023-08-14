@@ -12,6 +12,10 @@ class RefreshMembersJob < ApplicationJob
       end
       upsert_party(member.latest_party)
       upsert_member(member)
+
+      if member.latest_house_membership.membership_from_id.present?
+        FetchMemberConstituencyJob.perform_later(Member.find_by_member_ref(member.id), member.latest_house_membership.membership_from_id)
+      end
     end
 
     RefreshMembersJob.set(wait: pause.seconds).perform_later(start: start+batch, batch:, upto:) if start < upto

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_12_204433) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_13_142235) do
   create_table "constituencies", force: :cascade do |t|
     t.integer "constituency_ref"
     t.string "name"
@@ -20,6 +20,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_12_204433) do
     t.integer "member_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "summary"
     t.index ["constituency_ref"], name: "index_constituencies_on_constituency_ref"
     t.index ["member_id"], name: "index_constituencies_on_member_id"
   end

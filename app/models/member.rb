@@ -1,6 +1,6 @@
 class Member < ApplicationRecord
   belongs_to :party
-  has_as :constituency
+  has_one :constituency
 
   enum :house, { commons: 1, lords: 2 }
 
