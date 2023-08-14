@@ -3,7 +3,8 @@ class FetchMemberConstituencyJob < ApplicationJob
 
   queue_as :default
 
-  def perform(member, constituency_ref)
+  def perform(member)
+    return if member.house == 'lords'
     return if member.constituency.present? && member.constituency.updated_at > 1.week.ago
 
     constituency_data = nil
@@ -12,18 +13,18 @@ class FetchMemberConstituencyJob < ApplicationJob
 
     task = Async do 
       begin
-        constituency_data = locations_api.api_location_constituency_id_get(constituency_ref).value
+        constituency_data = locations_api.api_location_constituency_id_get(member.constituency_ref).value
       rescue ParliamentMembers::ApiError
         return 
       end
 
       begin
-        summary = locations_api.api_location_constituency_id_synopsis_get(constituency_ref).value
+        summary = locations_api.api_location_constituency_id_synopsis_get(member.constituency_ref).value
       rescue ParliamentMembers::ApiError
       end
 
       begin
-        geometry = locations_api.api_location_constituency_id_geometry_get(constituency_ref).value
+        geometry = locations_api.api_location_constituency_id_geometry_get(member.constituency_ref).value
       rescue ParliamentMembers::ApiError
       end
     end
