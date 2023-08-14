@@ -13,7 +13,7 @@ class RefreshMembersJob < ApplicationJob
       upsert_party(member.latest_party)
       upsert_member(member)
 
-      if member.latest_house_membership.house == 1 && member.latest_house_membership.membership_from_id.present?
+      if member&.latest_house_membership&.house == 1 && member.latest_house_membership.membership_from_id.present?
         FetchMemberConstituencyJob.perform_later(member.id)
       end
     end

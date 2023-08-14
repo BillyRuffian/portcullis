@@ -10,34 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_14_190854) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_13_142235) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "constituencies", force: :cascade do |t|
     t.integer "constituency_ref"
     t.string "name"
     t.date "start_date"
     t.date "end_date"
     t.text "geometry"
-    t.integer "member_id", null: false
+    t.bigint "member_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "summary"
     t.index ["constituency_ref"], name: "index_constituencies_on_constituency_ref"
     t.index ["member_id"], name: "index_constituencies_on_member_id"
-  end
-
-  create_table "delayed_jobs", force: :cascade do |t|
-    t.integer "priority", default: 0, null: false
-    t.integer "attempts", default: 0, null: false
-    t.text "handler", null: false
-    t.text "last_error"
-    t.datetime "run_at"
-    t.datetime "locked_at"
-    t.datetime "failed_at"
-    t.string "locked_by"
-    t.string "queue"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
   create_table "members", force: :cascade do |t|
@@ -51,7 +39,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_14_190854) do
     t.date "start_date"
     t.date "end_date"
     t.string "end_reason"
-    t.integer "party_id", null: false
+    t.bigint "party_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "thumbnail_url"
