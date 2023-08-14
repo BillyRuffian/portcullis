@@ -112,6 +112,7 @@ GEM
       xpath (~> 3.2)
     chartkick (5.0.3)
     concurrent-ruby (1.2.2)
+    connection_pool (2.4.1)
     console (1.21.0)
       fiber-annotation
       fiber-local
@@ -120,11 +121,6 @@ GEM
     debug (1.8.0)
       irb (>= 1.5.0)
       reline (>= 0.3.1)
-    delayed_job (4.1.11)
-      activesupport (>= 3.0, < 8.0)
-    delayed_job_active_record (4.1.7)
-      activerecord (>= 3.0, < 8.0)
-      delayed_job (>= 3.0, < 5)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
     erubi (1.12.0)
@@ -242,6 +238,8 @@ GEM
       thor (~> 1.0)
       zeitwerk (~> 2.5)
     rake (13.0.6)
+    redis-client (0.15.0)
+      connection_pool
     regexp_parser (2.8.1)
     reline (0.3.7)
       io-console (~> 0.5)
@@ -262,6 +260,11 @@ GEM
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
     sexp_processor (4.17.0)
+    sidekiq (7.1.2)
+      concurrent-ruby (< 2)
+      connection_pool (>= 2.3.0)
+      rack (>= 2.2.4)
+      redis-client (>= 0.14.0)
     sprockets (4.2.0)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -317,7 +320,6 @@ DEPENDENCIES
   capybara
   chartkick (~> 5.0)
   debug
-  delayed_job_active_record (~> 4.1)
   haml-rails (~> 2.1)
   html2haml (~> 2.3)
   http (~> 5.1)
@@ -330,6 +332,7 @@ DEPENDENCIES
   rails (~> 7.0.6)
   sassc-rails
   selenium-webdriver
+  sidekiq (~> 7.1)
   sprockets-rails
   sqlite3 (~> 1.4)
   stimulus-rails

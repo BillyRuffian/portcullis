@@ -87,4 +87,4 @@ gem "async", "~> 2.6"
 
 gem "http", "~> 5.1"
 
-gem "delayed_job_active_record", "~> 4.1"
+gem "sidekiq", "~> 7.1"

@@ -3,7 +3,8 @@ class FetchMemberConstituencyJob < ApplicationJob
 
   queue_as :default
 
-  def perform(member)
+  def perform(member_ref)
+    member = Member.find_by_member_ref(member_ref)
     return if member.house == 'lords'
     return if member.constituency.present? && member.constituency.updated_at > 1.week.ago
 
