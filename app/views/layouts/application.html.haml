@@ -9,6 +9,7 @@
     = stylesheet_link_tag "application", "data-turbo-track": "reload"
     = javascript_importmap_tags
   %body.bg-light
+    = render partial: 'shared/navbar'
     .modal{ tabindex: -1, data: {controller: 'modal', action: 'turbo:frame-load->modal#open turbo:submit-end->modal#close'} }
       .modal-dialog.modal-xl.modal-dialog-centered
         %turbo-frame#modal
