@@ -1,17 +1,20 @@
-PATH
-  remote: vendor/gems/parliament_commons_votes-1.0.0
+GIT
+  remote: https://github.com/BillyRuffian/parliament-commons-votes-api
+  revision: c408fe7503da7e62fabfe06374a15e1deb64d8b9
   specs:
     parliament_commons_votes (1.0.0)
       typhoeus (~> 1.0, >= 1.0.1)
 
-PATH
-  remote: vendor/gems/parliament_members-1.0.0
+GIT
+  remote: https://github.com/BillyRuffian/parliament-members-api
+  revision: 2272e4628b1116268babd9f662f0546b90aaaf34
   specs:
     parliament_members (1.0.0)
       typhoeus (~> 1.0, >= 1.0.1)
 
-PATH
-  remote: vendor/gems/parliament_written_questions-1.0.0
+GIT
+  remote: https://github.com/BillyRuffian/parliament-written-questions-api
+  revision: c205fbfe1c34bbf70359864ed03aaa0dacd65e8c
   specs:
     parliament_written_questions (1.0.0)
       typhoeus (~> 1.0, >= 1.0.1)
