@@ -31,6 +31,8 @@ class FetchMemberJob < ApplicationJob
 
   def save_or_update_party(member_data)
     party_data = member_data.latest_party
+    return nil unless party_data && party_data.id
+
     party = Party.find_by_party_ref(party_data.id) || Party.new
     party.update(
       party_ref: party_data.id,

@@ -5,7 +5,7 @@ class Member < ApplicationRecord
   enum :house, { commons: 1, lords: 2 }
 
   scope :search, -> (name) do 
-    where( 'display_as LIKE ?', "%#{name}%")
+    where( 'display_as ILIKE ?', "%#{name}%")
       .order(:display_as)
       .limit(15)
   end
