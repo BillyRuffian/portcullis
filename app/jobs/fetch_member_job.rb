@@ -1,5 +1,6 @@
 class FetchMemberJob < ApplicationJob
   include MembersConcern
+  include PartyJobsConcern
 
   queue_as :default
 
@@ -9,11 +10,11 @@ class FetchMemberJob < ApplicationJob
     member_data = fetch_member_api_data(member_ref)
     return nil unless member_data
 
-    party = save_or_update_party(member_data)
+    party = save_or_update_party(member_data.latest_party)
     member = save_or_update_member(member_data, party)
 
     if enqueue_related_jobs
-      FetchMemberConstituencyJob.set(wait: rand(30.3600).seconds).perform_later(member_ref)
+      FetchMemberConstituencyJob.set(wait: rand(30.3600).seconds).perform_later(member_ref, enqueue_related_jobs)
     end
 
     return member
@@ -26,26 +27,6 @@ class FetchMemberJob < ApplicationJob
   rescue ParliamentMembers::ApiError => e
     logger.info { "FetchMemberJob API lookup failed for member reference #{member_ref}: #{e.message}"}
     return nil
-  end
-
-
-  def save_or_update_party(member_data)
-    party_data = member_data.latest_party
-    return nil unless party_data && party_data.id
-
-    party = Party.find_by_party_ref(party_data.id) || Party.new
-    party.update(
-      party_ref: party_data.id,
-      name: party_data.name,
-      abbreviation: party_data.abbreviation,
-      background_hex: party_data.background_colour,
-      foreground_hex: party_data.foreground_colour,
-      lords_main_party: party_data.is_lords_main_party,
-      lords_spiritual_party: party_data.is_lords_spiritual_party,
-      independent_party: party_data.is_independent_party
-    )
-
-    return party
   end
 
 

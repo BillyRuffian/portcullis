@@ -3,7 +3,7 @@ class FetchMemberConstituencyJob < ApplicationJob
 
   queue_as :default
 
-  def perform(member_ref)
+  def perform(member_ref, enqueue_related_jobs = false)
     logger.info { "FetchMemberConstituencyJob fetching constituency for member reference #{member_ref}"}
     member = Member.find_by_member_ref(member_ref)
     return if member.nil?

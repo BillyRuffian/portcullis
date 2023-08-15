@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_14_121520) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_15_113233) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -41,6 +41,25 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_14_121520) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
+  end
+
+  create_table "election_results", force: :cascade do |t|
+    t.integer "election_ref"
+    t.bigint "constituency_id", null: false
+    t.date "election_date"
+    t.boolean "general_election"
+    t.string "title"
+    t.boolean "notional"
+    t.string "result"
+    t.integer "turnout"
+    t.integer "electorate"
+    t.integer "majority"
+    t.bigint "party_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["constituency_id"], name: "index_election_results_on_constituency_id"
+    t.index ["election_ref"], name: "index_election_results_on_election_ref"
+    t.index ["party_id"], name: "index_election_results_on_party_id"
   end
 
   create_table "members", force: :cascade do |t|
@@ -80,5 +99,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_14_121520) do
   end
 
   add_foreign_key "constituencies", "members"
+  add_foreign_key "election_results", "constituencies"
+  add_foreign_key "election_results", "parties"
   add_foreign_key "members", "parties"
 end

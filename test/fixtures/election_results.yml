@@ -1,0 +1,31 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  election_ref: 1
+  constituency: one
+  election_date: MyString
+  date: MyString
+  general_election: false
+  title: MyString
+  notional: false
+  result: MyString
+  turnout: 1
+  electorate: 1
+  turnout: 1
+  majority: 1
+  party: one
+
+two:
+  election_ref: 1
+  constituency: two
+  election_date: MyString
+  date: MyString
+  general_election: false
+  title: MyString
+  notional: false
+  result: MyString
+  turnout: 1
+  electorate: 1
+  turnout: 1
+  majority: 1
+  party: two
