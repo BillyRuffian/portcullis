@@ -13,7 +13,7 @@ class FetchMemberJob < ApplicationJob
     member = save_or_update_member(member_data, party)
 
     if enqueue_related_jobs
-      FetchMemberConstituencyJob.set(wait: rand(1.600).seconds).perform_later(member_ref)
+      FetchMemberConstituencyJob.set(wait: rand(30.3600).seconds).perform_later(member_ref)
     end
 
     return member
