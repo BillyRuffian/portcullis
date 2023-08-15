@@ -1,11 +1,11 @@
-class FetchElecttionResultsJob < ApplicationJob
+class FetchElectionHistoryJob < ApplicationJob
   include LocationsConcern
   include PartyJobsConcern
 
   queue_as :default
 
   def perform(constituency_ref, enqueue_related_jobs = false)
-    logger.info { "FetchElecttionResultsJob fetching latest election results for #{constituency_ref}" }
+    logger.info { "FetchElectionHistory fetching latest election results for #{constituency_ref}" }
     election_data = fetch_election_history(constituency_ref)
     return nil unless election_data
 
@@ -18,7 +18,7 @@ class FetchElecttionResultsJob < ApplicationJob
   def fetch_election_history(constituency_ref)
     locations_api.api_location_constituency_id_election_results_get(constituency_ref).value
   rescue ParliamentMembers::ApiError => e
-    logger.info { "FetchElecttionResultsJob API lookup failed for election results for in constituency ref #{constituency_ref}: #{e.message}"}
+    logger.info { "FetchElectionHistory API lookup failed for election results for in constituency ref #{constituency_ref}: #{e.message}"}
     nil
   end
 
