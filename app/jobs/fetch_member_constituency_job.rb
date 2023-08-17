@@ -1,7 +1,7 @@
 class FetchMemberConstituencyJob < ApplicationJob
   include LocationsConcern
 
-  queue_as :default
+  queue_as :api
 
   def perform(member_ref, enqueue_related_jobs = false)
     logger.info { "FetchMemberConstituencyJob fetching constituency for member reference #{member_ref}"}

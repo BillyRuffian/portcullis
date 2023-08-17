@@ -2,7 +2,7 @@ class FetchMemberJob < ApplicationJob
   include MembersConcern
   include PartyJobsConcern
 
-  queue_as :default
+  queue_as :api
 
   def perform(member_ref, enqueue_related_jobs = false)
     logger.info { "FetchMemberJob fetching member reference #{member_ref}"}

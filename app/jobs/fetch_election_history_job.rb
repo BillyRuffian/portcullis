@@ -2,7 +2,7 @@ class FetchElectionHistoryJob < ApplicationJob
   include LocationsConcern
   include PartyJobsConcern
 
-  queue_as :default
+  queue_as :api
 
   def perform(constituency_ref, enqueue_related_jobs = false)
     logger.info { "FetchElectionHistory fetching latest election results for #{constituency_ref}" }
