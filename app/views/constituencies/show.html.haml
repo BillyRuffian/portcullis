@@ -7,10 +7,10 @@
           .row 
             .col-3
               %h3.card-title= @constituency.name 
-              %p= strip_tags @summary
+              %p= strip_tags @constituency.summary
             .col-9
               #map.leaflet-container.border.border-3.rounded.shadow-sm{ style: 'min-height: 400px' }
-                %div{ data: { controller: 'map', 'map-geourl-value': geometry_constituency_path(@constituency.id) } } 
+                %div{ data: { controller: 'map', 'map-geourl-value': geometry_constituency_path(@constituency.constituency_ref) } } 
       
     .card.mb-3.shadow-sm 
       .card-header= @election_results.election_title
@@ -41,26 +41,29 @@
           
     .card.mb-3.shadow-sm 
       .card-header Election history 
-      .card-body
-        .card-text
-          %table.table
-            %thead 
-              %tr 
-                %th/ 
-                %th Date 
-                %th Election title 
-                %th Result
-                %th Majority 
-                %th Turnout 
-                
-            %tbody 
-              - @election_history.sort_by(&:election_date).reverse.each do |election| 
-                %tr
-                  %td 
-                    %i.bi.bi-square-fill{ style: "color: ##{election.winning_party.background_colour}"}
-                  %td= election.election_date.to_date.to_fs(:long)
-                  %td= election.election_title 
-                  %td= election.result
-                  %td= number_with_delimiter(election.majority)
-                  %td= number_to_percentage((election.turnout.to_f / election.electorate.to_f) * 100, precision: 2)
-            
+      - if @election_history.empty?
+        %h3 No election history to display 
+      - else
+        .card-body
+          .card-text
+            %table.table
+              %thead 
+                %tr 
+                  %th/ 
+                  %th Date 
+                  %th Election title 
+                  %th Result
+                  %th Majority 
+                  %th Turnout 
+                  
+              %tbody 
+                - @election_history.sort_by(&:election_date).reverse.each do |election| 
+                  %tr
+                    %td 
+                      %i.bi.bi-square-fill{ style: "color: ##{election.party.background_hex}"}
+                    %td= election.election_date.to_date.to_fs(:long)
+                    %td= election.title 
+                    %td= election.result
+                    %td= number_with_delimiter(election.majority)
+                    %td= number_to_percentage((election.turnout.to_f / election.electorate.to_f) * 100, precision: 2)
+          

@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  election_result: one
+  name: MyString
+  party: one
+  change: 9.99
+  order: 1
+  votes: 1
+  share: 9.99
+
+two:
+  election_result: two
+  name: MyString
+  party: two
+  change: 9.99
+  order: 1
+  votes: 1
+  share: 9.99

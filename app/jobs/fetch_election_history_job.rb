@@ -5,7 +5,7 @@ class FetchElectionHistoryJob < ApplicationJob
   queue_as :api
 
   def perform(constituency_ref, enqueue_related_jobs = false)
-    logger.info { "FetchElectionHistory fetching latest election results for #{constituency_ref}" }
+    logger.info { "FetchElectionHistory fetching historical election results for #{constituency_ref}" }
     election_data = fetch_election_history(constituency_ref)
     return nil unless election_data
 
