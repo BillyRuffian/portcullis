@@ -85,5 +85,6 @@ test:
 production:
   <<: *default
   database: portcullis_production
-  username: portcullis
-  password: <%= ENV["PORTCULLIS_DATABASE_PASSWORD"] %>
+  username: postgres
+  password: <%= ENV["POSTGRES_PASSWORD"] %>
+  host: 10.0.0.3

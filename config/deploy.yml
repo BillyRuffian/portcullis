@@ -6,7 +6,18 @@ image: nrbrookes/portcullis
 
 # Deploy to these servers.
 servers:
-  - 95.217.128.48
+  web:
+    hosts:
+      - 95.217.128.48
+    options: 
+      "add-host": host.docker.internal:host-gateway
+
+  job:
+    hosts: 
+      - 95.217.128.48
+    options: 
+      "add-host": host.docker.internal:host-gateway
+    cmd: "bundle exec sidekiq"
 
 # Credentials for your image host.
 registry:
@@ -22,6 +33,7 @@ registry:
 env:
   clear:
     DB_HOST: 95.217.1.177
+    REDIS_URL: "redis://host.docker.internal:36379/0"
   secret:
     - RAILS_MASTER_KEY
     - POSTGRES_PASSWORD
@@ -59,11 +71,12 @@ accessories:
       - data:/var/lib/postgresql/data
 
   redis:
-    image: redis:7.0
-    host: 95.217.128.48
-    port: 6379
-    directories:
-      - data:/data
+    image: redis:latest
+    roles:
+      - web
+    port: "36379:6379"
+    volumes:
+      - /var/lib/redis:/data
 
 # Configure custom arguments for Traefik
 # traefik:
