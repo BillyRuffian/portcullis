@@ -34,7 +34,7 @@ env:
   clear:
     DB_HOST: 95.217.1.177
     REDIS_URL: "redis://host.docker.internal:36379/0"
-    RAILS_LOG_TO_STDOUT: "true"
+    # RAILS_LOG_TO_STDOUT: "true"
   secret:
     - RAILS_MASTER_KEY
     - POSTGRES_PASSWORD
