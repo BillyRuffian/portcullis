@@ -10,9 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_15_113233) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_17_131518) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "candidates", force: :cascade do |t|
+    t.bigint "election_result_id", null: false
+    t.string "name"
+    t.bigint "party_id", null: false
+    t.decimal "change"
+    t.integer "order"
+    t.integer "votes"
+    t.decimal "share"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["election_result_id"], name: "index_candidates_on_election_result_id"
+    t.index ["party_id"], name: "index_candidates_on_party_id"
+  end
 
   create_table "constituencies", force: :cascade do |t|
     t.integer "constituency_ref"
@@ -83,6 +97,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_15_113233) do
     t.index ["party_ref"], name: "index_parties_on_party_ref", unique: true
   end
 
+  add_foreign_key "candidates", "election_results"
+  add_foreign_key "candidates", "parties"
   add_foreign_key "constituencies", "members"
   add_foreign_key "election_results", "constituencies"
   add_foreign_key "election_results", "parties"

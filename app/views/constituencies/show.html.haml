@@ -13,11 +13,11 @@
                 %div{ data: { controller: 'map', 'map-geourl-value': geometry_constituency_path(@constituency.constituency_ref) } } 
       
     .card.mb-3.shadow-sm 
-      .card-header= @election_results.election_title
+      .card-header= @election_results.title
       .card-body
         .card-text 
           .row.mb-3.text-center
-            - @election_results.candidates.sort_by(&:rank_order).first.then do |winner|
+            - @election_results.candidates.sort_by(&:order).first.then do |winner|
               %h3 #{winner.party.name} majority of #{number_with_delimiter(@election_results.majority)}
               %h3.small.text-body-secondary 
                 turnout #{number_with_delimiter(@election_results.turnout)}
@@ -26,17 +26,17 @@
           .row.mb-3
             .col-6.text-center
               %h6.card-title Latest election results 
-              = pie_chart @election_results.candidates.sort_by(&:rank_order).map{ |c| [c.party.name, c.votes] }, colors: @election_results.candidates.sort_by(&:rank_order).map { |c| "##{c.party.background_colour}"}, legend: 'bottom', thousands: ','
+              = pie_chart @election_results.candidates.sort_by(&:order).map{ |c| [c.party.name, c.votes] }, colors: @election_results.candidates.sort_by(&:order).map { |c| "##{c.party.background_hex}"}, legend: 'bottom', thousands: ','
             .col-6.text-center
               %h6.card-title Change in vote share
-              = column_chart @election_results.candidates.sort_by(&:rank_order).map{ |c| [c.party.abbreviation, c.result_change.to_f] }, suffix: '%', colors: @election_results.candidates.sort_by(&:rank_order).map { |c| "##{c.party.background_colour}"}, thousands: ','
+              = column_chart @election_results.candidates.sort_by(&:order).map{ |c| [c.party.abbreviation, c.change.to_f] }, suffix: '%', colors: @election_results.candidates.sort_by(&:order).map { |c| "##{c.party.background_hex}"}, thousands: ','
           .row.mb-3.text-center
             %h6.card-title Candidates
-            - @election_results.candidates.sort_by(&:rank_order).each_slice(5) do |cs| 
+            - @election_results.candidates.sort_by(&:order).each_slice(5) do |cs| 
               %ul.list-inline.justify-content-center
                 - cs.each do |c| 
                   %li.list-inline-item.px-2
-                    %span.badge{ style: "background: ##{c.party.background_colour || '555'}; color: ##{c.party.foreground_colour}"}= c.party.abbreviation
+                    %span.badge{ style: "background: ##{c.party.background_hex || '555'}; color: ##{c.party.foreground_hex}"}= c.party.abbreviation
                     = c.name
           
     .card.mb-3.shadow-sm 
