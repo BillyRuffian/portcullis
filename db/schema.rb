@@ -42,6 +42,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_17_131518) do
     t.index ["member_id"], name: "index_constituencies_on_member_id"
   end
 
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer "priority", default: 0, null: false
+    t.integer "attempts", default: 0, null: false
+    t.text "handler", null: false
+    t.text "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string "locked_by"
+    t.string "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["priority", "run_at"], name: "delayed_jobs_priority"
+  end
+
   create_table "election_results", force: :cascade do |t|
     t.integer "election_ref"
     t.bigint "constituency_id", null: false
