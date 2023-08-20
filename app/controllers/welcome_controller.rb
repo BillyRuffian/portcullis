@@ -5,7 +5,9 @@ class WelcomeController < ApplicationController
       parties: Party.count,
       constituencies: Constituency.count,
       election_results: ElectionResult.count,
-      candidates: Candidate.count
+      candidates: Candidate.count,
+      commons_divisions: CommonsDivision.count,
+      commons_votes: CommonsVote.count
     }
   end
 end

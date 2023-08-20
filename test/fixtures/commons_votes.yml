@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  commons_division: one
+  member: one
+  vote: 1
+
+two:
+  commons_division: two
+  member: two
+  vote: 1

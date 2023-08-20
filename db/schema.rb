@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_17_131518) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_20_123043) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -28,6 +28,36 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_17_131518) do
     t.index ["party_id"], name: "index_candidates_on_party_id"
   end
 
+  create_table "commons_divisions", force: :cascade do |t|
+    t.integer "division_ref"
+    t.date "division_date"
+    t.date "publication_updated_at"
+    t.string "number"
+    t.boolean "deferred"
+    t.string "evel_type"
+    t.string "evel_country"
+    t.string "title"
+    t.integer "aye_count"
+    t.integer "no_count"
+    t.integer "double_majority_aye_count"
+    t.integer "double_majority_no_count"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["division_date"], name: "index_commons_divisions_on_division_date"
+    t.index ["division_ref"], name: "index_commons_divisions_on_division_ref"
+    t.index ["number"], name: "index_commons_divisions_on_number"
+  end
+
+  create_table "commons_votes", force: :cascade do |t|
+    t.bigint "commons_division_id", null: false
+    t.bigint "member_id", null: false
+    t.integer "vote"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["commons_division_id"], name: "index_commons_votes_on_commons_division_id"
+    t.index ["member_id"], name: "index_commons_votes_on_member_id"
+  end
+
   create_table "constituencies", force: :cascade do |t|
     t.integer "constituency_ref"
     t.string "name"
@@ -40,21 +70,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_17_131518) do
     t.text "summary"
     t.index ["constituency_ref"], name: "index_constituencies_on_constituency_ref"
     t.index ["member_id"], name: "index_constituencies_on_member_id"
-  end
-
-  create_table "delayed_jobs", force: :cascade do |t|
-    t.integer "priority", default: 0, null: false
-    t.integer "attempts", default: 0, null: false
-    t.text "handler", null: false
-    t.text "last_error"
-    t.datetime "run_at"
-    t.datetime "locked_at"
-    t.datetime "failed_at"
-    t.string "locked_by"
-    t.string "queue"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
   create_table "election_results", force: :cascade do |t|
@@ -114,6 +129,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_17_131518) do
 
   add_foreign_key "candidates", "election_results"
   add_foreign_key "candidates", "parties"
+  add_foreign_key "commons_votes", "commons_divisions"
+  add_foreign_key "commons_votes", "members"
   add_foreign_key "constituencies", "members"
   add_foreign_key "election_results", "constituencies"
   add_foreign_key "election_results", "parties"

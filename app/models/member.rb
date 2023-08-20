@@ -1,6 +1,8 @@
 class Member < ApplicationRecord
   belongs_to :party
   has_one :constituency
+  has_many :commons_votes, dependent: :destroy
+  has_many :commons_divisions, through: :commons_votes
 
   enum :house, { commons: 1, lords: 2 }
 

@@ -1,0 +1,29 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  division_ref: 1
+  division_date: 2023-08-20
+  publication_updated_at: 2023-08-20
+  number: MyString
+  deferred: false
+  evel_type: MyString
+  evel_country: MyString
+  title: MyString
+  aye_count: 1
+  no_count: 1
+  double_majority_aye_count: 1
+  double_majority_no_count: 1
+
+two:
+  division_ref: 1
+  division_date: 2023-08-20
+  publication_updated_at: 2023-08-20
+  number: MyString
+  deferred: false
+  evel_type: MyString
+  evel_country: MyString
+  title: MyString
+  aye_count: 1
+  no_count: 1
+  double_majority_aye_count: 1
+  double_majority_no_count: 1
