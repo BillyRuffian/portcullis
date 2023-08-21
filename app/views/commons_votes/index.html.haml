@@ -5,38 +5,29 @@
         .col Commons votes
         .col.text-end Page #{@page} / #{@total_pages}
     .card-body
-      %table.table 
-        -@votes.each_pair do |timestamp, day_votes|
+      %table.table.table-responsive-md
+        -@divisions.each_pair do |timestamp, day_divisions|
           %thead
             %tr.table-light.small
               %th= timestamp.to_date.to_fs(:day_and_date)
               %th.text-center Vote 
-              %th.text-center For / Against (Total)
+              -# %th.text-center For / Against (Total)
               %th.text-center Result
+              %th 
           %tbody
-            - day_votes.each do |vote|
+            - day_divisions.each do |division|
               %tr 
-                %td= CGI.unescape(vote.title)
-                %td.text-center
-                  - if vote.in_affirmative_lobby
-                    %span.badge.text-bg-primary
-                      For
-                  - elsif vote.acted_as_teller 
-                    %span.badge.text-bg-light
-                      Teller 
-                  - else 
-                    %span.badge.text-bg-info
-                      Against 
-                %td.text-center
-                  #{vote.number_in_favour} / #{vote.number_against} (#{vote.number_in_favour + vote.number_against})
+                %td= CGI.unescape(division.title)
+                %td.text-center= division.commons_votes.first.vote.to_s.humanize
+
                 %td.text-center 
-                  - if vote.number_in_favour > vote.number_against 
+                  - if division.aye_count > division.no_count 
                     %span.badge.text-bg-success
                       %i.bi.bi-check-lg
                   - else 
                     %span.badge.text-bg-danger
                       %i.bi.bi-x-lg
+                %td{style: 'pointer-events: none'}= pie_chart({ayes: division.aye_count, noes: division.no_count}, colors: ['#32CD32', ' #FF5733'], height: '24px', width: '24px', legend: false)
 
     .card-footer.text-body-secondary.d-flex.justify-content-end
       = render partial: 'shared/pagination', locals: {total_pages: @total_pages, page: @page, url_helper: -> (page) {member_votes_path(page: page)}, scroll_to: 'votes'}
-      -# = debug @votes

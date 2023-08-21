@@ -41,7 +41,7 @@ class FetchCommonsDivisionVotesJob < ApplicationJob
                   when :noes 
                     :no
                   else
-                    :abstain
+                    :no_vote_recorded
                   end
           )
         end

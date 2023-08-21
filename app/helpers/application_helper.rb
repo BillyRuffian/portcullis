@@ -13,7 +13,7 @@ module ApplicationHelper
   end
 
 
-  def pagination_range(total_pages, current_page, leading = 2, following = 3)
+  def pagination_range(total_pages, current_page, leading = 2, following = 2)
     return (1..total_pages) if total_pages <= leading + following + 1 
 
     if current_page <= leading 
