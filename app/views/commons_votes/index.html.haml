@@ -18,7 +18,7 @@
           %tbody
             - day_divisions.each do |division|
               %tr 
-                %td= CGI.unescape(division.title)
+                %td= division.title
                 %td.text-center= division.commons_votes.first.vote.to_s.humanize
 
                 %td.text-center 

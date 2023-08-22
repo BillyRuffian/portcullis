@@ -31,7 +31,7 @@ class FetchCommonsDivisionsJob < ApplicationJob
         deferred: dd.is_deferred,
         evel_type: dd.evel_type,
         evel_country: dd.evel_country,
-        title: dd.title,
+        title: CGI.unescape(dd.title),
         aye_count: dd.aye_count,
         no_count: dd.no_count,
         double_majority_aye_count: dd.double_majority_aye_count,
