@@ -1,11 +1,10 @@
 
-%section.mb-3
-  .container 
-    .card
-      .card-header{ style: "background-color: ##{@member.party.background_hex}" }
+%section.my-3
+  .container
+    .card.shadow-sm
       .row.g-0
         .col-md-3
-          %img.img-thumbnail.img-fluid.rounded{alt: "Official photograph of #{@member.address_as}", src: @member.thumbnail_url}/
+          %img.img-fluid.img-fluid.rounded-start{alt: "Official photograph of #{@member.address_as}", src: @member.thumbnail_url}/
         .col-md-9
           .card-body
             %h5.card-title= @member.full_title
@@ -22,7 +21,7 @@
                 or #{distance_of_time_in_words(@member.start_date, Date.today)}.
             - if @member.commons?
               %p.card-text
-                They #{@member.current? ? 'represents' : 'last represented'} the
+                They #{@member.current? ? 'represent' : 'last represented'} the
                 %a{href: constituency_path(@member.constituency_ref )}= @member.constituency_name
                 constituency.
 
