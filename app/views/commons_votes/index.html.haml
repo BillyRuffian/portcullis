@@ -18,7 +18,8 @@
           %tbody
             - day_divisions.each do |division|
               %tr 
-                %td= division.title
+                %td
+                  = link_to( division.title, commons_division_path(division.division_ref), data: { turbo_frame: '_top' })
                 %td.text-center= division.commons_votes.first.vote.to_s.humanize
 
                 %td.text-center 

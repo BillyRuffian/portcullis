@@ -1,0 +1,20 @@
+.container.py-3
+  .card.shadow-sm.mb-3
+    .card-body
+      %h1.card-title= @division.title
+      %h2.card-title.text-secondary= @division.division_date.to_fs(:day_and_date)
+      .card-text
+        .row
+          .col-6.d-flex 
+            %ul.list-group.list-group-flush.justify-content-center.flex-fill
+              %li.list-group-item
+                %b Ayes 
+                = @division.aye_count
+              %li.list-group-item 
+                %b Noes 
+                = @division.no_count
+              %li.list-group-item 
+                %b Majority 
+                = @division.majority
+          .col-6
+            = pie_chart( { ayes: @division.aye_count, noes: @division.no_count }, legend: :bottom, colors: ['#32CD32', ' #FF5733'], donut: true )

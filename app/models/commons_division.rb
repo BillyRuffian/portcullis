@@ -16,4 +16,8 @@ class CommonsDivision < ApplicationRecord
     commons_votes.where(member:)
   end
 
+  def majority
+    (aye_count - no_count).abs
+  end
+
 end

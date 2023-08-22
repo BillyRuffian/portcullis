@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
-
-  namespace :commons do
-    resources :divisions, only: :index
-  end
+  # namespace :commons do
+  #   resources :divisions, only: :index
+  # end
 
   resources :members, only: :show do 
 
@@ -34,6 +33,7 @@ Rails.application.routes.draw do
   resources :constituencies, only: :show do
     member { get 'geometry' }
   end
+  resources :commons_divisions, only: :show
 
   # get 'parties/index'
   # get 'parties/show'
