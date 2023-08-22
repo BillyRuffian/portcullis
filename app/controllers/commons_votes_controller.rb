@@ -1,3 +1,5 @@
+# This is the controller for the members votes page, the turboframe
+
 class CommonsVotesController < ApplicationController
   include MembersConcern
 

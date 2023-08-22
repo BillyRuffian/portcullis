@@ -2,7 +2,7 @@
   .card.shadow-sm
     .card-header
       .row.justify-content-between
-        .col-auto Commons votes
+        .col-auto Divisions
         .col-auto
           = render partial: 'shared/pagination', locals: {total_pages: @total_pages, page: @page, url_helper: -> (page) {member_votes_path(page: page)}, scroll_to: 'votes'}
     .card-body
