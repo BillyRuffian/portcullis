@@ -1,28 +1,30 @@
 -# expects: total_pages:integer, page:integer, url_helper:lambda(integer), scroll_to:String
 
 %nav{ 'aria-label': '"Page navigation example' }
-  %ul.pagination{ data: {controller: 'scroller'}}
+  %ul.pagination.pagination-sm.m-0{ data: {controller: 'scroller'}}
     - page_range = pagination_range(total_pages, page)
     %li.page-item{ class: page <= 1 ? 'disabled' : nil } 
       %a.page-link{ href: url_helper.(1), data: {action: 'click->scroller#scroll', scroller_divtarget_param: scroll_to} } 
-        %i.bi.bi-skip-start-fill
+        -# %i.bi.bi-skip-start-fill
+        1
     %li.page-item{ class: page <= 1 ? 'disabled' : nil }
       %a.page-link{ href: url_helper.(page - 1), data: {action: 'click->scroller#scroll', scroller_divtarget_param: scroll_to} } 
         %i.bi.bi-caret-left-fill
-    - if !(page_range).include?(1)
-      %li.page-item.disabled 
-        %a.page-link{ href: '#' }
-          %i.bi.bi-three-dots 
+    -# - if !(page_range).include?(1)
+    -#   %li.page-item.disabled 
+    -#     %a.page-link{ href: '#' }
+    -#       %i.bi.bi-three-dots 
     - page_range.each do |p|
-      %li.page-item{ class: page == p ? 'disabled' : nil }
+      %li.page-item{ class: page == p ? 'active' : nil }
         %a.page-link{ href: url_helper.(p), data: {action: 'click->scroller#scroll', scroller_divtarget_param: scroll_to} }= p
-    - if !(page_range).include?(total_pages)
-      %li.page-item.disabled 
-        %a.page-link{ href: '#' }
-          %i.bi.bi-three-dots
+    -# - if !(page_range).include?(total_pages)
+    -#   %li.page-item.disabled 
+    -#     %a.page-link{ href: '#' }
+    -#       %i.bi.bi-three-dots
     %li.page-item{ class: page >= total_pages ? 'disabled' : nil }
       %a.page-link{ href: url_helper.(page + 1), data: {action: 'click->scroller#scroll', scroller_divtarget_param: scroll_to} } 
         %i.bi.bi-caret-right-fill
     %li.page-item{ class: page >= total_pages ? 'disabled' : nil }
       %a.page-link{ href: url_helper.(total_pages), data: {action: 'click->scroller#scroll', scroller_divtarget_param: scroll_to} } 
-        %i.bi.bi-skip-end-fill
+        -# %i.bi.bi-skip-end-fill
+        = total_pages

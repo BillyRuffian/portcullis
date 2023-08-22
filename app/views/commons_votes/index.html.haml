@@ -1,9 +1,10 @@
 %turbo-frame#votes
   .card.shadow-sm
     .card-header
-      .row
-        .col Commons votes
-        .col.text-end Page #{@page} / #{@total_pages}
+      .row.justify-content-between
+        .col-auto Commons votes
+        .col-auto
+          = render partial: 'shared/pagination', locals: {total_pages: @total_pages, page: @page, url_helper: -> (page) {member_votes_path(page: page)}, scroll_to: 'votes'}
     .card-body
       %table.table.table-responsive-md
         -@divisions.each_pair do |timestamp, day_divisions|
