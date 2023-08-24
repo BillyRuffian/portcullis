@@ -5,16 +5,53 @@
       %h2.card-title.text-secondary= @division.division_date.to_fs(:day_and_date)
       .card-text
         .row
-          .col-6.d-flex 
-            %ul.list-group.list-group-flush.justify-content-center.flex-fill
-              %li.list-group-item
-                %b Ayes 
-                = @division.aye_count
-              %li.list-group-item 
-                %b Noes 
-                = @division.no_count
-              %li.list-group-item 
-                %b Majority 
-                = @division.majority
-          .col-6
+          .col-md-3
+            %table.table.table-borderless
+              %tbody 
+                %tr 
+                  %th.text-end Ayes 
+                  %td= @division.aye_count
+                %tr 
+                  %th.text-end Noes 
+                  %td= @division.no_count
+                %tr 
+                  %th.text-end Majority 
+                  %td= @division.majority
+            -# %ul.list-group.list-group-flush.justify-content-center.flex-fill
+            -#   %li.list-group-item
+            -#     %b Ayes 
+            -#     = @division.aye_count
+            -#   %li.list-group-item 
+            -#     %b Noes 
+            -#     = @division.no_count
+            -#   %li.list-group-item 
+            -#     %b Majority 
+            -#     = @division.majority
+          .col-md-9
             = pie_chart( { ayes: @division.aye_count, noes: @division.no_count }, legend: :bottom, colors: ['#32CD32', ' #FF5733'], donut: true )
+
+
+  - chart = division_voting_by_party_chart_data(@division)
+  .card.shadow-sm.mb-3
+    .card-header 
+      Party voting
+    .row
+      .col-lg-6
+        .card-body
+          = column_chart(chart[:data], stacked: false, legend: :bottom, colors: chart[:colours], stacked: true, height: '500px')
+      .col-lg-6
+        .card-body
+          %table.table.table-responsive.table-striped
+            %thead 
+              %tr 
+                %th Party
+                %th Ayes
+                %th Noes 
+                %th Not Recorded 
+            %tbody.table-group-divider
+              - chart[:data].sort_by { |entry| entry[:name] }.each do |row|
+                %tr 
+                  %td= row[:name]
+                  %td.text-center= row[:data].select { |entry| entry.first == 'Aye' }.first.last
+                  %td.text-center= row[:data].select { |entry| entry.first == 'No' }.first.last
+                  %td.text-center= row[:data].select { |entry| entry.first == 'No vote recorded' }.first.last

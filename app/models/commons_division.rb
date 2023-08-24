@@ -20,4 +20,13 @@ class CommonsDivision < ApplicationRecord
     (aye_count - no_count).abs
   end
 
+  def voting_by_party 
+    commons_votes
+      .includes(member: :party)
+      .group_by { |v| v.vote }
+      .transform_values { |x| x.map { |v| v.member.party } }
+      .transform_values { |v| v.tally }
+      .with_indifferent_access
+  end
+
 end
