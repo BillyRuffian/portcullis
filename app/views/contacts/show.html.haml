@@ -1,18 +1,16 @@
 
 %turbo-frame#contact
   - unless @contacts.empty?
-    .card.bg-light.mb-3.shadow-sm
+    .card.mb-3.shadow-sm
       .card-header Contact information
-      .card-body 
-        .row.row-col-autojustify-content-center
+      .card-body
+        .row.row-cols-auto.row-cols-sm-2.row-cols-md-3.row-cols-lg-4.row-cols-xl-6.mx-auto
           - @contacts.each do |contact| 
-            .card.p-0.m-1.col
-              .card-body 
-                .hstack.align-items-start.gap-3 
-                  .p-1= contact_icon(contact) 
-                  .p-2
-                    - if contact.is_web_address
-                      %a.stretched-link{ href: contact.line1 }= URI(contact.line1).host.sub(/^www./, '')
-                    - else
-                      = contact_address(contact)
-              .card-footer.text-body-secondary.text-center= contact.type
+            .col-auto
+              .hstack.align-items-start.gap-3 
+                .p-1= contact_icon(contact) 
+                .p-2
+                  - if contact.is_web_address
+                    %a{ href: contact.line1 }= URI(contact.line1).host.sub(/^www./, '')
+                  - else
+                    = contact_address(contact)

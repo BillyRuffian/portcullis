@@ -18,6 +18,8 @@ module ContactsHelper
       'bi bi-twitter'
     when 'Facebook'
       'bi bi-facebook'
+    when 'Instagram'
+      'bi bi-instagram'
     when /office$/
       'bi bi-building-fill'
     else
