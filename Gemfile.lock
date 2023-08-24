@@ -176,6 +176,16 @@ GEM
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
+    kamal (0.16.0)
+      activesupport (>= 7.0)
+      bcrypt_pbkdf (~> 1.0)
+      concurrent-ruby (~> 1.2)
+      dotenv (~> 2.8)
+      ed25519 (~> 1.2)
+      net-ssh (~> 7.0)
+      sshkit (~> 1.21)
+      thor (~> 1.2)
+      zeitwerk (~> 2.5)
     llhttp-ffi (0.4.0)
       ffi-compiler (~> 1.0)
       rake (~> 13.0)
@@ -348,6 +358,7 @@ DEPENDENCIES
   http (~> 5.1)
   importmap-rails
   jbuilder
+  kamal (~> 0.16.0)
   mrsk (~> 0.15.1)
   parliament_commons_votes!
   parliament_members!

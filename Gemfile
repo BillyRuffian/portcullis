@@ -90,3 +90,5 @@ gem "http", "~> 5.1"
 gem "sidekiq", "~> 7.1"
 
 gem "mrsk", "~> 0.15.1"
+
+gem "kamal", "~> 0.16.0"
