@@ -59,8 +59,7 @@
               %tbody 
                 - @election_history.sort_by(&:election_date).reverse.each do |election| 
                   %tr
-                    %td 
-                      %i.bi.bi-square-fill{ style: "color: ##{election.party.background_hex}"}
+                    %td= render partial: 'shared/party_badge', locals: { party: election.party }
                     %td= election.election_date.to_date.to_fs(:long)
                     %td= election.title 
                     %td= election.result

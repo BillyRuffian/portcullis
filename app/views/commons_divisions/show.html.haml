@@ -33,8 +33,7 @@
 
   - chart = division_voting_by_party_chart_data(@division)
   .card.shadow-sm.mb-3
-    .card-header 
-      Party voting
+    .card-header Party voting
     .row
       .col-lg-6
         .card-body
@@ -55,3 +54,22 @@
                   %td.text-center= row[:data].select { |entry| entry.first == 'Aye' }.first.last
                   %td.text-center= row[:data].select { |entry| entry.first == 'No' }.first.last
                   %td.text-center= row[:data].select { |entry| entry.first == 'No vote recorded' }.first.last
+
+
+  .card.shadow-sm.mb-3
+    .card-header Member Votes
+    .card-body 
+      %table.table.table-responsive.table-striped 
+        %thead 
+          %tr 
+            %th Member 
+            %th Party 
+            %th Vote 
+        %tbody 
+          - @division.members.sort_by(&:list_as).each do |member|
+            %tr 
+              %td= link_to member.list_as, member_path(member.member_ref)
+              %td
+                = render partial: 'shared/party_badge', locals: { party: member.party }
+                = member.party.name 
+              %td= @division.commons_votes.find_by(member:).vote.humanize
