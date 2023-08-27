@@ -1,0 +1,5 @@
+.container
+  .card.my-3.shadow-sm
+    .card-body 
+      #map.leaflet-container.border.border-3.rounded.shadow-sm{ style: 'min-height: 700px' }
+        %div{ data: { controller: 'map', 'map-geourl-value': geometries_constituencies_path } } 

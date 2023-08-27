@@ -30,8 +30,9 @@ Rails.application.routes.draw do
   resources :written_questions, as: :questions, only: :show
   resources :oral_contributions, as: :contributions, only: :show
   resources :parties, only: :index
-  resources :constituencies, only: :show do
+  resources :constituencies, only: [:show, :index] do
     member { get 'geometry' }
+    collection { get 'geometries' }
   end
   resources :commons_divisions, only: :show
 

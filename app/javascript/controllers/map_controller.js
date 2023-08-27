@@ -20,7 +20,16 @@ export default class extends Controller {
         return response.json();
       })
       .then( function (json) {
-        var constituency = L.geoJson(json).addTo(map);
+        var constituency = L.geoJson(json,{
+          style: function(constituency) {
+            return {
+              color: constituency.geometry.properties.colour,
+              opacity: 1.0,
+              fillOpacity: 0.6,
+              weight: 3
+            }
+          }
+        }).addTo(map);
         map.fitBounds(constituency.getBounds());
       })
     
