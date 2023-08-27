@@ -21,7 +21,10 @@ class ConstituenciesController < ApplicationController
   def geometries 
     constituencies = Constituency.active 
     render json: Constituency.active.map { |c| 
-      JSON.parse(c.geometry).merge( properties: {colour: "##{c.party.background_hex}"} )
+      JSON.parse(c.geometry).merge( properties: {
+        colour: "##{c.party.background_hex}",
+        popup: "#{c.name}: #{c.member.display_as} (#{c.party.name})"
+      } )
     }
   end
 end
