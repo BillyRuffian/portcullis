@@ -7,7 +7,7 @@ namespace :jobs do
     divisions = CommonsDivision.where.missing(:commons_votes)
 
     divisions.each_with_index do |div, idx|
-      FetchCommonsDivisionVotesJob.set(wait_until: idx.seconds.from_now).perform_later(div.division_ref)
+      FetchCommonsDivisionVotesJob.perform_async(div.division_ref)
     end
   end
 end

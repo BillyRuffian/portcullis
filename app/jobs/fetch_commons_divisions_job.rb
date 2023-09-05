@@ -1,7 +1,12 @@
-class FetchCommonsDivisionsJob < ApplicationJob
+class FetchCommonsDivisionsJob
+  include Sidekiq::Job
+  include Sidekiq::Throttled::Job
+
   include CommonsDivisionsConcern
 
-  queue_as :api
+  sidekiq_options queue: :api
+
+  sidekiq_throttle( threshold: { limit: 1_000, period: 1.hour } )
 
   def perform(skip = 0)
     logger.info { "FetchCommonsDivisions fetching commons divisions" }

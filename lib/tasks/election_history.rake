@@ -4,7 +4,7 @@ namespace :jobs do
     puts 'Queuing election history refresh'
     
     Constituency.pluck(:constituency_ref).each_with_index do |ref, idx|
-      FetchElectionHistoryJob.set(wait_until: idx.seconds.from_now).perform_later(ref)
+      FetchElectionHistoryJob.perform_async(ref)
     end
   end
 end

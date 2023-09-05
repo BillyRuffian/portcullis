@@ -1,8 +1,13 @@
-class FetchElectionCandidatesJob < ApplicationJob
+class FetchElectionCandidatesJob 
+  include Sidekiq::Job
+  include Sidekiq::Throttled::Job
+
   include LocationsConcern
   include PartyJobsConcern
 
-  queue_as :api
+  sidekiq_options queue: :api
+
+  sidekiq_throttle( threshold: { limit: 1_000, period: 1.hour } )
 
   def perform(constituency_ref, election_ref)
     logger.info { "FetchElectionLatest fetching latest election results for #{constituency_ref} / #{election_ref}" }

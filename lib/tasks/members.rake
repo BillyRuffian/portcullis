@@ -5,7 +5,7 @@ namespace :jobs do
     puts "Queuing member refresh from #{args.start_ref} to #{args.end_ref}"
     
     (args.start_ref.to_i..args.end_ref.to_i).each_with_index do |ref, idx|
-      FetchMemberJob.set(wait_until: idx.seconds.from_now).perform_later(ref, true)
+      FetchMemberJob.perform_async(ref, true)
     end
   end
 end

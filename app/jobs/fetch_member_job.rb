@@ -1,8 +1,17 @@
-class FetchMemberJob < ApplicationJob
+class FetchMemberJob
+  include Sidekiq::Job
+  include Sidekiq::Throttled::Job
+
   include MembersConcern
   include PartyJobsConcern
 
-  queue_as :api
+  MY_OBSERVER = lambda do |strategy, *args|
+    logger.info('THROTTLE')
+  end
+
+  sidekiq_options queue: :api
+
+  sidekiq_throttle( threshold: { limit: 1_000, period: 1.hour } )
 
   def perform(member_ref, enqueue_related_jobs = false)
     logger.info { "FetchMemberJob fetching member reference #{member_ref}"}
@@ -14,7 +23,7 @@ class FetchMemberJob < ApplicationJob
     member = save_or_update_member(member_data, party)
 
     if enqueue_related_jobs
-      FetchMemberConstituencyJob.set(wait: rand(30.3600).seconds).perform_later(member_ref, enqueue_related_jobs)
+      FetchMemberConstituencyJob.perform_at(10.minutes.from_now, member_ref, enqueue_related_jobs)
     end
 
     return member

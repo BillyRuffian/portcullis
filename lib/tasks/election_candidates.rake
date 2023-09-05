@@ -5,9 +5,6 @@ namespace :jobs do
 
     ElectionResult.includes(:constituency, :candidates)
                   .where(candidates: {election_result_id: nil} )
-                  .each_with_index do |er, idx|
-                    FetchElectionCandidatesJob.set(wait_until: idx.seconds.from_now)
-                                              .perform_later(er.constituency.constituency_ref, er.election_ref)
-                  end
+                  .each { |er| FetchElectionCandidatesJob.perform_async(er.constituency.constituency_ref, er.election_ref) }
   end
 end

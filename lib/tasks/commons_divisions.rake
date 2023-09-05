@@ -13,7 +13,7 @@ namespace :jobs do
     pages = (total_results / 25.0).ceil
 
     pages.times do |page|
-      FetchCommonsDivisionsJob.set(wait_until: page.seconds.from_now).perform_later(page * 25)
+      FetchCommonsDivisionsJob.perform_async(page * 25)
     end
   end
 end

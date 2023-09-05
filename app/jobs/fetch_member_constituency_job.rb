@@ -1,7 +1,12 @@
-class FetchMemberConstituencyJob < ApplicationJob
+class FetchMemberConstituencyJob
+  include Sidekiq::Job
+  include Sidekiq::Throttled::Job
+
   include LocationsConcern
 
-  queue_as :api
+  sidekiq_options queue: :api
+  
+  sidekiq_throttle( threshold: { limit: 1_000, period: 1.hour } )
 
   def perform(member_ref, enqueue_related_jobs = false)
     logger.info { "FetchMemberConstituencyJob fetching constituency for member reference #{member_ref}"}

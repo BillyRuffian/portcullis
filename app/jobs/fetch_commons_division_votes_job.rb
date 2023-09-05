@@ -1,7 +1,12 @@
-class FetchCommonsDivisionVotesJob < ApplicationJob
+class FetchCommonsDivisionVotesJob
+  include Sidekiq::Job
+  include Sidekiq::Throttled::Job
+  
   include CommonsDivisionsConcern
 
-  queue_as :api 
+  sidekiq_options queue: :api
+
+  sidekiq_throttle( threshold: { limit: 1_000, period: 1.hour } )
 
   def perform(division_ref)
     division = CommonsDivision.find_by_division_ref(division_ref)
