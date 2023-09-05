@@ -6,7 +6,7 @@ class FetchCommonsDivisionsJob
 
   sidekiq_options queue: :api
 
-  sidekiq_throttle( threshold: { limit: 1_000, period: 1.hour } )
+  sidekiq_throttle( threshold: { limit: 100, period: 15.minutes } )
 
   def perform(skip = 0)
     logger.info { "FetchCommonsDivisions fetching commons divisions" }

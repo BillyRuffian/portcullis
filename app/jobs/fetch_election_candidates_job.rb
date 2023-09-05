@@ -7,7 +7,7 @@ class FetchElectionCandidatesJob
 
   sidekiq_options queue: :api
 
-  sidekiq_throttle( threshold: { limit: 1_000, period: 1.hour } )
+  sidekiq_throttle( threshold: { limit: 100, period: 15.minutes } )
 
   def perform(constituency_ref, election_ref)
     logger.info { "FetchElectionLatest fetching latest election results for #{constituency_ref} / #{election_ref}" }

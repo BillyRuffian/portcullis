@@ -6,7 +6,7 @@ class FetchMemberConstituencyJob
 
   sidekiq_options queue: :api
   
-  sidekiq_throttle( threshold: { limit: 1_000, period: 1.hour } )
+  sidekiq_throttle( threshold: { limit: 100, period: 15.minutes } )
 
   def perform(member_ref, enqueue_related_jobs = false)
     logger.info { "FetchMemberConstituencyJob fetching constituency for member reference #{member_ref}"}
