@@ -11,7 +11,7 @@ class FetchMemberJob
 
   sidekiq_options queue: :api
 
-  sidekiq_throttle( threshold: { limit: 100, period: 15.minutes } )
+  sidekiq_throttle( threshold: { limit: 100, period: 5.minutes } )
 
   def perform(member_ref, enqueue_related_jobs = false)
     logger.info { "FetchMemberJob fetching member reference #{member_ref}"}
